@@ -50,10 +50,9 @@
 <link rel="alternate" hreflang="ru" href="https://fatihdemirsoy.com/ru/">
 <link rel="alternate" hreflang="x-default" href="https://fatihdemirsoy.com/en/">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✉️</text></svg>">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
-<style>
+<link rel="preload" href="/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
+<style>@font-face{font-family:"Schibsted Grotesk";src:url("/fonts/schibsted-grotesk.woff2") format("woff2");font-weight:400 800;font-style:normal;font-display:swap}
+
 :root{
   --bg:#EDF1EF; --surface:#F8FAF9; --ink:#1B2A31; --muted:#56666D;
   --line:#C9D3CF; --ok:#0E7A63; --diff:#A3245A; --accent:#1E4FBF; --on-accent:#FFFFFF;
@@ -325,8 +324,8 @@ button.btn[disabled]{opacity:.6;cursor:wait}
       <form class="quote" id="quote" novalidate>
         <div class="field"><label for="f-ad">Ad soyad</label><input id="f-ad" data-k="name" autocomplete="name" required></div>
         <div class="field"><label for="f-firma">Firma <span class="opt">(isteğe bağlı)</span></label><input id="f-firma" data-k="company" autocomplete="organization"></div>
-        <div class="field"><label for="f-tel">Telefon</label><input id="f-tel" data-k="phone" type="tel" autocomplete="tel" inputmode="tel"></div>
-        <div class="field"><label for="f-mail">E-posta</label><input id="f-mail" data-k="email" type="email" autocomplete="email"></div>
+        <div class="field"><label for="f-tel">Telefon <span class="opt">(isteğe bağlı)</span></label><input id="f-tel" data-k="phone" type="tel" autocomplete="tel" inputmode="tel"></div>
+        <div class="field"><label for="f-mail">E-posta</label><input id="f-mail" data-k="email" type="email" autocomplete="email" required></div>
         <div class="field"><label for="f-kul">Kullanıcı sayısı</label><input id="f-kul" data-k="users" type="number" min="1" inputmode="numeric" required></div>
         <div class="field"><label for="f-dom">Alan adı sayısı</label><input id="f-dom" data-k="domains" type="number" min="1" value="1" inputmode="numeric"></div>
         <div class="field full"><label for="f-kay">Şu an hangi mail hizmetini kullanıyorsunuz?</label>
@@ -364,7 +363,7 @@ button.btn[disabled]{opacity:.6;cursor:wait}
 </script>
 <script>
 (function(){
-  var T = {"e_name": "Adınızı yazın.", "e_contact": "Size dönebilmem için telefon ya da e-posta yazın.", "e_email": "E-posta adresini kontrol edin.", "e_users": "Kullanıcı sayısını yazın, yaklaşık olması yeterli.", "sending": "Gönderiliyor…", "ok": "Teklif isteğiniz ulaştı. Aynı gün dönüş yapacağım.", "fail": "Gönderilemedi. “WhatsApp’tan gönder” düğmesini kullanın ya da bilgi@fatihdemirsoy.com adresine yazın.", "wa_intro": "Merhaba, Google Workspace geçişi için teklif almak istiyorum.", "code": "TR", "labels": {"name": "Ad soyad", "company": "Firma", "phone": "Telefon", "email": "E-posta", "users": "Kullanıcı sayısı", "domains": "Alan adı sayısı", "source": "Şu an hangi mail hizmetini kullanıyorsunuz", "note": "Eklemek istedikleriniz"}};
+  var T = {"e_name": "Adınızı yazın.", "e_contact": "Size dönebilmem için e-posta adresinizi yazın.", "e_email": "E-posta adresini kontrol edin.", "e_users": "Kullanıcı sayısını yazın, yaklaşık olması yeterli.", "sending": "Gönderiliyor…", "ok": "Teklif isteğiniz ulaştı. Aynı gün dönüş yapacağım.", "fail": "Gönderilemedi. “WhatsApp’tan gönder” düğmesini kullanın ya da bilgi@fatihdemirsoy.com adresine yazın.", "wa_intro": "Merhaba, Google Workspace geçişi için teklif almak istiyorum.", "code": "TR", "labels": {"name": "Ad soyad", "company": "Firma", "phone": "Telefon", "email": "E-posta", "users": "Kullanıcı sayısı", "domains": "Alan adı sayısı", "source": "Şu an hangi mail hizmetini kullanıyorsunuz", "note": "Eklemek istedikleriniz"}};
   var MAIL = "bilgi@fatihdemirsoy.com", WA = "902622444189";
   var form = document.getElementById("quote"), st = document.getElementById("status");
   var btn = document.getElementById("send-mail");
@@ -378,9 +377,9 @@ button.btn[disabled]{opacity:.6;cursor:wait}
     Object.keys(d).forEach(function(k){ if (d[k]) o[T.labels[k]] = d[k]; });
     return o;
   }
-  function check(d){
+  function check(d, viaWa){
     if (!d.name) return T.e_name;
-    if (!d.phone && !d.email) return T.e_contact;
+    if (!viaWa && !d.email) return T.e_contact;
     if (d.email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(d.email)) return T.e_email;
     if (!d.users) return T.e_users;
     return "";
@@ -406,7 +405,7 @@ button.btn[disabled]{opacity:.6;cursor:wait}
       .finally(function(){ btn.disabled = false; });
   });
   document.getElementById("send-wa").addEventListener("click", function(){
-    var d = data(), err = check(d);
+    var d = data(), err = check(d, true);
     if (err) { say(err, "err"); return; }
     var lines = [T.wa_intro, ""], l = labeled(d);
     Object.keys(l).forEach(function(k){ lines.push(k + ": " + l[k]); });

@@ -368,8 +368,8 @@ button.btn[disabled]{opacity:.6;cursor:wait}
       method: "POST", headers: {"Content-Type":"application/json","Accept":"application/json"}, body: JSON.stringify(body)
     }).then(function(r){ return r.json(); }).then(function(j){
       if (j && (j.success === true || j.success === "true")) { form.reset(); say(T.ok, "ok"); }
-      else throw new Error();
-    }).catch(function(){ say(T.fail, "err"); })
+      else throw new Error((j && j.message) || "unknown");
+    }).catch(function(err){ console.error("Form gonderim hatasi:", err && err.message); say(T.fail, "err"); })
       .finally(function(){ btn.disabled = false; });
   });
   document.getElementById("send-wa").addEventListener("click", function(){

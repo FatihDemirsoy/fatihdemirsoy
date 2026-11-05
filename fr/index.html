@@ -17,10 +17,9 @@
 <link rel="alternate" hreflang="ru" href="https://fatihdemirsoy.com/ru/">
 <link rel="alternate" hreflang="x-default" href="https://fatihdemirsoy.com/en/">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✉️</text></svg>">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
-<style>
+<link rel="preload" href="/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
+<style>@font-face{font-family:"Schibsted Grotesk";src:url("/fonts/schibsted-grotesk.woff2") format("woff2");font-weight:400 800;font-style:normal;font-display:swap}
+
 :root{
   --bg:#EDF1EF; --surface:#F8FAF9; --ink:#1B2A31; --muted:#56666D;
   --line:#C9D3CF; --ok:#0E7A63; --diff:#A3245A; --accent:#1E4FBF; --on-accent:#FFFFFF;
@@ -292,15 +291,15 @@ button.btn[disabled]{opacity:.6;cursor:wait}
       <form class="quote" id="quote" novalidate>
         <div class="field"><label for="f-ad">Nom et prénom</label><input id="f-ad" data-k="name" autocomplete="name" required></div>
         <div class="field"><label for="f-firma">Entreprise <span class="opt">(facultatif)</span></label><input id="f-firma" data-k="company" autocomplete="organization"></div>
-        <div class="field"><label for="f-tel">Téléphone</label><input id="f-tel" data-k="phone" type="tel" autocomplete="tel" inputmode="tel"></div>
-        <div class="field"><label for="f-mail">E-mail</label><input id="f-mail" data-k="email" type="email" autocomplete="email"></div>
+        <div class="field"><label for="f-tel">Téléphone <span class="opt">(facultatif)</span></label><input id="f-tel" data-k="phone" type="tel" autocomplete="tel" inputmode="tel"></div>
+        <div class="field"><label for="f-mail">E-mail</label><input id="f-mail" data-k="email" type="email" autocomplete="email" required></div>
         <div class="field"><label for="f-kul">Nombre d’utilisateurs</label><input id="f-kul" data-k="users" type="number" min="1" inputmode="numeric" required></div>
         <div class="field"><label for="f-dom">Nombre de domaines</label><input id="f-dom" data-k="domains" type="number" min="1" value="1" inputmode="numeric"></div>
         <div class="field full"><label for="f-kay">Quel service de messagerie utilisez-vous aujourd’hui ?</label>
-          <select id="f-kay" data-k="source"><option>Yandex</option><option>Messagerie de l’hébergeur (cPanel, Plesk)</option><option>Microsoft 365 / Outlook</option><option>Un autre compte Google Workspace</option><option>Autre / je ne sais pas</option></select></div>
+          <select id="f-kay" data-k="source"><option>Messagerie de l’hébergeur (cPanel, Plesk)</option><option>Microsoft 365 / Outlook</option><option>Yandex</option><option>Un autre compte Google Workspace</option><option>Autre / je ne sais pas</option></select></div>
         <div class="field full"><label for="f-not">Autres précisions <span class="opt">(facultatif)</span></label><textarea id="f-not" data-k="note"></textarea></div>
         <div class="hp" aria-hidden="true"><label for="f-hp">Laissez ce champ vide</label><input id="f-hp" name="_honey" tabindex="-1" autocomplete="off"></div>
-        <p class="kvkk full">Vos informations servent uniquement à préparer votre devis et ne sont jamais partagées.</p>
+        <p class="kvkk full">Seuls le nom, l’e-mail et le nombre d’utilisateurs sont obligatoires. Vos informations servent uniquement à préparer votre devis (RGPD) et ne sont jamais partagées.</p>
         <div class="actions full">
           <button class="btn" type="submit" id="send-mail">Envoyer la demande</button>
           <button class="btn ghost" type="button" id="send-wa">Envoyer sur WhatsApp</button>
@@ -331,7 +330,7 @@ button.btn[disabled]{opacity:.6;cursor:wait}
 </script>
 <script>
 (function(){
-  var T = {"e_name": "Indiquez votre nom.", "e_contact": "Indiquez un téléphone ou un e-mail pour que je puisse vous répondre.", "e_email": "Vérifiez l’adresse e-mail.", "e_users": "Indiquez le nombre d’utilisateurs, une estimation suffit.", "sending": "Envoi en cours…", "ok": "Votre demande est bien arrivée. Je réponds aujourd’hui.", "fail": "Échec de l’envoi. Utilisez « Envoyer sur WhatsApp » ou écrivez à bilgi@fatihdemirsoy.com.", "wa_intro": "Bonjour, je souhaite un devis pour une migration vers Google Workspace.", "code": "FR", "labels": {"name": "Nom et prénom", "company": "Entreprise", "phone": "Téléphone", "email": "E-mail", "users": "Nombre d’utilisateurs", "domains": "Nombre de domaines", "source": "Quel service de messagerie utilisez-vous aujourd’hui", "note": "Autres précisions"}};
+  var T = {"e_name": "Indiquez votre nom.", "e_contact": "Indiquez votre e-mail pour que je puisse vous répondre.", "e_email": "Vérifiez l’adresse e-mail.", "e_users": "Indiquez le nombre d’utilisateurs, une estimation suffit.", "sending": "Envoi en cours…", "ok": "Votre demande est bien arrivée. Je réponds aujourd’hui.", "fail": "Échec de l’envoi. Utilisez « Envoyer sur WhatsApp » ou écrivez à bilgi@fatihdemirsoy.com.", "wa_intro": "Bonjour, je souhaite un devis pour une migration vers Google Workspace.", "code": "FR", "labels": {"name": "Nom et prénom", "company": "Entreprise", "phone": "Téléphone", "email": "E-mail", "users": "Nombre d’utilisateurs", "domains": "Nombre de domaines", "source": "Quel service de messagerie utilisez-vous aujourd’hui", "note": "Autres précisions"}};
   var MAIL = "bilgi@fatihdemirsoy.com", WA = "902622444189";
   var form = document.getElementById("quote"), st = document.getElementById("status");
   var btn = document.getElementById("send-mail");
@@ -345,9 +344,9 @@ button.btn[disabled]{opacity:.6;cursor:wait}
     Object.keys(d).forEach(function(k){ if (d[k]) o[T.labels[k]] = d[k]; });
     return o;
   }
-  function check(d){
+  function check(d, viaWa){
     if (!d.name) return T.e_name;
-    if (!d.phone && !d.email) return T.e_contact;
+    if (!viaWa && !d.email) return T.e_contact;
     if (d.email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(d.email)) return T.e_email;
     if (!d.users) return T.e_users;
     return "";
@@ -373,7 +372,7 @@ button.btn[disabled]{opacity:.6;cursor:wait}
       .finally(function(){ btn.disabled = false; });
   });
   document.getElementById("send-wa").addEventListener("click", function(){
-    var d = data(), err = check(d);
+    var d = data(), err = check(d, true);
     if (err) { say(err, "err"); return; }
     var lines = [T.wa_intro, ""], l = labeled(d);
     Object.keys(l).forEach(function(k){ lines.push(k + ": " + l[k]); });

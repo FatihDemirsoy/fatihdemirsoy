@@ -240,6 +240,13 @@ figure.report{margin:0}
 .copy{font:inherit;font-size:.85rem;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:999px;padding:.3rem .75rem;cursor:pointer;min-height:36px}
 .paybox .btn{margin:1rem 0 .5rem}
 @media (max-width:40rem){.paybox .bank dt{min-width:0;width:100%}}
+
+.payopts{border:0;margin:0 0 .85rem;padding:0;display:grid;gap:.5rem}
+.payopts label{display:flex;gap:.6rem;align-items:flex-start;padding:.65rem .75rem;border:1px solid var(--line);border-radius:10px;cursor:pointer;background:var(--bg)}
+.payopts input{margin-top:.25rem;accent-color:var(--accent);width:1.05rem;height:1.05rem;flex:none}
+.payopts label:has(input:checked){border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.payopts b{display:block}
+.payopts span{color:var(--muted);font-size:.92rem}
 </style>
 </head>
 <body>
@@ -376,6 +383,7 @@ figure.report{margin:0}
         <div class="hp" aria-hidden="true"><label for="f-hp">Biarkan kolom ini kosong</label><input id="f-hp" name="_honey" tabindex="-1" autocomplete="off"></div>
         <div class="estimate full" id="estimate" aria-live="polite">
           <h3>Perkiraan biaya</h3>
+          
           <dl>
             <div><dt>Total</dt><dd id="e-total">–</dd></div>
             <div><dt>Dibayar sekarang</dt><dd id="e-dep">–</dd></div>
@@ -448,9 +456,10 @@ figure.report{margin:0}
     var extras = (dm - 1) * P.dom, r = { users: u };
     if (P.cur === "TRY") {
       r.total = P.main + Math.max(0, u - 5) * P.user + extras;
-      r.split = u > P.split_over;
-      r.now = r.split ? Math.round(r.total / 2) : r.total;
-      r.rest = r.total - r.now;
+      var sel = form.querySelector('input[name="paymode"]:checked');
+      r.split = !!sel && sel.value === "dep";
+      r.now = r.split ? Math.round(r.total / 2) : Math.round(r.total * (1 - P.discount));
+      r.rest = r.split ? r.total - r.now : 0;
     } else {
       var tier = null;
       for (var i = 0; i < P.tiers.length; i++) if (u <= P.tiers[i][0]) { tier = P.tiers[i]; break; }
@@ -500,7 +509,7 @@ figure.report{margin:0}
     btn.disabled = true; say(T.sending);
     var c = calc(d), payInfo;
     if (c.custom) payInfo = "Özel teklif (40+ kullanıcı)";
-    else if (P.cur === "TRY") payInfo = (c.split ? "%50 kapora " : "Tamamı peşin ") + fmt(Math.round(c.now * (1 + P.vat))) + " KDV dahil, havale kodu " + ref;
+    else if (P.cur === "TRY") payInfo = (c.split ? "Kapora seçildi, %50: " : "Tamamı peşin seçildi, %5 indirimli: ") + fmt(Math.round(c.now * (1 + P.vat))) + " KDV dahil, havale kodu " + ref;
     else payInfo = "Paket " + fmt(c.now) + (c.link ? " Payoneer linki gösterildi, ödeme gelince linki yenile" : " - link yok, ödeme linkini mail ile gönder") + (c.rest ? " | ek domain " + fmt(c.rest) + " ayrıca faturalanacak" : "");
     var body = Object.assign({ "Dil / Language": T.code }, labeled(d), {
       "Tahmini toplam": c.custom ? "-" : fmt(c.total) + (P.cur === "TRY" ? " + KDV" : ""), "Ödeme": payInfo,

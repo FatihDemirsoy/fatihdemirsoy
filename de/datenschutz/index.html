@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Datenschutzerklärung | Fatih Demirsoy</title>
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://fatihdemirsoy.com/de/datenschutz/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✉️</text></svg>">
+<style>@font-face{font-family:"Schibsted Grotesk";src:url("/fonts/schibsted-grotesk.woff2") format("woff2");font-weight:400 800;font-style:normal;font-display:swap}
+
+:root{
+  --bg:#EDF1EF; --surface:#F8FAF9; --ink:#1B2A31; --muted:#56666D;
+  --line:#C9D3CF; --ok:#0E7A63; --diff:#A3245A; --accent:#1E4FBF; --on-accent:#FFFFFF;
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#121A1E; --surface:#1A252A; --ink:#E4ECE9; --muted:#9AAAA6;
+    --line:#2E3D43; --ok:#3FC7A4; --diff:#F07AAB; --accent:#7EA2FF; --on-accent:#0D1620;
+    color-scheme:dark;
+  }
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Schibsted Grotesk",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  font-size:1.0625rem;line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:68rem;margin:0 auto;padding:0 1.25rem}
+.measure{max-width:38rem}
+
+/* header */
+.top{display:flex;justify-content:space-between;align-items:center;padding:1.25rem 0}
+.name{font-weight:800;letter-spacing:-.01em;text-decoration:none;color:var(--ink)}
+.top a.small{font-size:.95rem}
+
+/* hero */
+.hero{display:grid;gap:2.5rem;padding:2.5rem 0 4rem;align-items:center}
+@media (min-width:60rem){.hero{grid-template-columns:1fr 1.05fr;gap:3.5rem;padding:4rem 0 5.5rem}}
+h1{
+  font-size:clamp(2.1rem,5.2vw,3.4rem);line-height:1.05;letter-spacing:-.025em;
+  font-weight:800;margin:0 0 1.25rem;
+}
+.lede{font-size:1.2rem;color:var(--muted);margin:0 0 2rem;max-width:32rem}
+.btn{
+  display:inline-block;background:var(--accent);color:var(--on-accent);
+  font-weight:700;text-decoration:none;padding:.9rem 1.4rem;border-radius:999px;
+}
+.btn:hover{filter:brightness(1.08)}
+.under{font-size:.95rem;color:var(--muted);margin-top:1rem}
+
+/* the count report: the memorable element */
+.report{
+  background:var(--surface);border:1px solid var(--line);border-radius:14px;
+  padding:1.25rem 1.25rem .75rem;
+}
+.report h2{font-size:1rem;margin:0 0 .25rem;font-weight:700;letter-spacing:0}
+.report p.cap{font-size:.9rem;color:var(--muted);margin:0 0 1rem}
+.scroll{overflow-x:auto}
+table.count{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:.98rem;min-width:24rem}
+.count th{font-size:.85rem;font-weight:500;color:var(--muted);text-align:right;padding:.4rem .5rem;border-bottom:1px solid var(--line)}
+.count th:first-child,.count td:first-child{text-align:left}
+.count td{padding:.6rem .5rem;text-align:right;border-bottom:1px solid var(--line)}
+.count tr:last-child td{border-bottom:0}
+.count td.who{font-weight:500}
+.st{font-weight:700;white-space:nowrap}
+.st.ok{color:var(--ok)}
+.st.diff{color:var(--diff)}
+.note{font-size:.85rem;color:var(--muted);text-align:left!important;padding-top:0!important;border-bottom:1px solid var(--line)}
+
+/* sections */
+section.block{padding:3.5rem 0;border-top:1px solid var(--line)}
+h2.sec{font-size:clamp(1.6rem,3.2vw,2.2rem);line-height:1.15;letter-spacing:-.02em;margin:0 0 1rem;font-weight:800}
+.block p{margin:0 0 1rem}
+
+ol.steps{list-style:none;padding:0;margin:2rem 0 0;display:grid;gap:1.75rem;counter-reset:s}
+@media (min-width:48rem){ol.steps{grid-template-columns:repeat(4,1fr)}}
+ol.steps li{counter-increment:s;border-top:3px solid var(--ink);padding-top:.9rem}
+ol.steps li::before{content:counter(s);display:block;font-weight:800;font-size:1.6rem;line-height:1;margin-bottom:.6rem}
+ol.steps h3{font-size:1.05rem;margin:0 0 .35rem}
+ol.steps p{font-size:.97rem;color:var(--muted);margin:0}
+
+.prices{display:grid;gap:2.5rem}
+@media (min-width:56rem){.prices{grid-template-columns:1.2fr 1fr;gap:4rem}}
+table.price{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.price td{padding:.85rem 0;border-bottom:1px solid var(--line);vertical-align:top}
+.price td:last-child{text-align:right;font-weight:700;white-space:nowrap;padding-left:1rem}
+.price tr.main td{font-size:1.15rem}
+.price small{display:block;color:var(--muted);font-weight:400;font-size:.9rem}
+.fine{font-size:.92rem;color:var(--muted);margin-top:1rem}
+.example{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1.25rem 1.4rem}
+.example h3{margin:0 0 .75rem;font-size:1.05rem}
+.example p{margin:0 0 .5rem;font-variant-numeric:tabular-nums}
+.example p:last-child{margin:0}
+
+.two{display:grid;gap:2rem}
+@media (min-width:48rem){.two{grid-template-columns:1fr 1fr;gap:3.5rem}}
+.two h3{font-size:1.1rem;margin:0 0 .75rem}
+ul.plain{margin:0;padding-left:1.1rem}
+ul.plain li{margin-bottom:.45rem}
+
+.case{display:grid;gap:2rem}
+@media (min-width:56rem){.case{grid-template-columns:.8fr 1.2fr;gap:4rem}}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:0}
+.facts div{border-left:3px solid var(--ok);padding-left:.75rem}
+.facts dt{font-size:.9rem;color:var(--muted)}
+.facts dd{margin:0;font-size:1.9rem;font-weight:800;line-height:1.1}
+
+details{border-bottom:1px solid var(--line);padding:1rem 0}
+details summary{cursor:pointer;font-weight:700;list-style-position:outside}
+details p{margin:.6rem 0 0;color:var(--muted)}
+
+.contact{padding:4rem 0 5rem;border-top:1px solid var(--line)}
+.contact .row{display:flex;flex-wrap:wrap;gap:1rem 1.5rem;align-items:center;margin-top:1.5rem}
+footer{font-size:.9rem;color:var(--muted);padding:1.5rem 0 2.5rem;border-top:1px solid var(--line)}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* form */
+form.quote{display:grid;gap:1rem;margin-top:1.75rem;max-width:40rem}
+@media (min-width:40rem){form.quote{grid-template-columns:1fr 1fr}.full{grid-column:1/-1}}
+.field label{display:block;font-weight:500;font-size:.95rem;margin-bottom:.35rem}
+.field .opt{color:var(--muted);font-weight:400}
+.field input,.field select,.field textarea{
+  width:100%;font:inherit;color:var(--ink);background:var(--surface);
+  border:1px solid var(--line);border-radius:10px;padding:.7rem .8rem;
+}
+.field textarea{min-height:6.5rem;resize:vertical}
+.field input:focus-visible,.field select:focus-visible,.field textarea:focus-visible{outline:3px solid var(--accent);outline-offset:1px}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.actions{display:flex;flex-wrap:wrap;gap:.75rem 1rem;align-items:center}
+button.btn{border:0;cursor:pointer;font:inherit;font-weight:700}
+button.btn[disabled]{opacity:.6;cursor:wait}
+.btn.ghost{background:transparent;color:var(--accent);border:2px solid var(--accent)}
+.status{min-height:1.5rem;font-weight:500;margin:0}
+.status.ok{color:var(--ok)}.status.err{color:var(--diff)}
+.kvkk{font-size:.88rem;color:var(--muted);margin:0}
+.contact .alt{margin-top:2rem;color:var(--muted)}
+
+/* language switcher */
+.langs{display:flex;flex-wrap:wrap;gap:.15rem .6rem;font-size:.9rem;margin:0;padding:0;list-style:none}
+.langs a{color:var(--muted);text-decoration:none;padding:.15rem 0}
+.langs a:hover{color:var(--ink);text-decoration:underline}
+.langs a[aria-current="true"]{color:var(--ink);font-weight:700}
+.top{flex-wrap:wrap;gap:.75rem 1.5rem}
+.top-right{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1.25rem}
+
+.legal{max-width:44rem;padding:2rem 0 4rem}
+.legal h1{font-size:clamp(1.9rem,4vw,2.6rem);margin-bottom:.5rem}
+.legal h2{font-size:1.2rem;margin:2.2rem 0 .6rem}
+.legal p,.legal li{color:var(--ink)}
+.legal .stand{color:var(--muted);margin-bottom:2rem}
+.legal ul{padding-left:1.2rem}
+</style></head>
+<body><div class="wrap">
+<header class="top"><a class="name" href="/de/">Fatih Demirsoy</a><a class="small" href="/de/">Zur Startseite</a></header>
+<main class="legal"><h1>Datenschutzerklärung</h1>
+<p class="stand">Stand: November 2026</p>
+
+<h2>1. Verantwortlicher</h2>
+<p>Fatih Demirsoy<br>E-Mail: <a href="mailto:contact@fatihdemirsoy.com">contact@fatihdemirsoy.com</a><br>Die vollständige Anschrift finden Sie im Impressum.</p>
+
+<h2>2. Grundsätze</h2>
+<p>Diese Website setzt keine Cookies, keine Analyse- oder Tracking-Werkzeuge und keine Werbedienste ein. Schriftarten werden lokal von dieser Website geladen, nicht von Servern Dritter. Personenbezogene Daten verarbeite ich nur, soweit dies für den Betrieb der Website und die Bearbeitung Ihrer Anfrage erforderlich ist.</p>
+
+<h2>3. Hosting und Server-Logdateien</h2>
+<p>Die Website wird über GitHub Pages bereitgestellt (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA). Beim Aufruf der Seiten verarbeitet GitHub technisch notwendige Daten wie IP-Adresse, Datum und Uhrzeit des Abrufs, aufgerufene Seite und Browserinformationen, um die Website auszuliefern und ihre Sicherheit zu gewährleisten. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO; mein berechtigtes Interesse liegt in einer sicheren und zuverlässigen Bereitstellung der Website. Eine Übermittlung in die USA ist dabei möglich; sie erfolgt auf Grundlage des EU-U.S. Data Privacy Framework bzw. von Standardvertragsklauseln der EU-Kommission. Weitere Informationen: <a href="https://docs.github.com/de/site-policy/privacy-policies/github-general-privacy-statement">Datenschutzerklärung von GitHub</a>.</p>
+
+<h2>4. Anfrageformular</h2>
+<p>Wenn Sie das Formular absenden, verarbeite ich die von Ihnen eingegebenen Daten: Name, E-Mail-Adresse, Anzahl der Benutzer und Domains, Ihren derzeitigen E-Mail-Dienst sowie freiwillig Firma, Telefonnummer und Ihre Nachricht. Die Daten werden über Google Apps Script an mein E-Mail-Postfach bei Google Workspace übermittelt (Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland). Eine Verarbeitung durch Google LLC in den USA ist möglich; sie erfolgt auf Grundlage des EU-U.S. Data Privacy Framework bzw. von Standardvertragsklauseln.</p>
+<p>Zweck ist die Bearbeitung Ihrer Anfrage und die Erstellung eines Angebots. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen). Die Daten werden gelöscht, sobald die Anfrage abgeschlossen ist. Kommt ein Auftrag zustande, gelten die gesetzlichen Aufbewahrungsfristen für Geschäftsunterlagen.</p>
+
+<h2>5. Kontakt per E-Mail und WhatsApp</h2>
+<p>Wenn Sie mir eine E-Mail schreiben, verarbeite ich Ihre Angaben zur Beantwortung Ihrer Nachricht (Art. 6 Abs. 1 lit. b DSGVO). Die Schaltflächen „Per WhatsApp schreiben“ und „Per WhatsApp senden“ öffnen WhatsApp mit einem vorbereiteten Nachrichtentext. Daten werden erst übertragen, wenn Sie die Nachricht in WhatsApp selbst absenden. Anbieter ist WhatsApp Ireland Limited, 4 Grand Canal Square, Dublin 2, Irland; es gilt die Datenschutzrichtlinie von WhatsApp. Wenn Sie WhatsApp nicht nutzen möchten, verwenden Sie bitte das Formular oder E-Mail.</p>
+
+<h2>6. Speicherung im Browser</h2>
+<p>Wählen Sie eine Sprache aus, speichert die Website diese Auswahl im lokalen Speicher Ihres Browsers (localStorage, Schlüssel „site-lang“), damit die Seite beim nächsten Besuch in derselben Sprache erscheint. Diese Information verlässt Ihr Gerät nicht. Die Speicherung ist für den von Ihnen gewünschten Dienst unbedingt erforderlich (§ 25 Abs. 2 Nr. 2 TDDDG). Sie können sie jederzeit über die Einstellungen Ihres Browsers löschen. Ohne gespeicherte Auswahl ermittelt die Seite die passende Sprache anhand der Zeitzone und der Spracheinstellung Ihres Browsers; auch diese Angaben werden nicht übertragen.</p>
+
+<h2>7. Externe Links</h2>
+<p>Die Website enthält Links zu anderen Angeboten, etwa Linktree. Erst wenn Sie einen Link anklicken, werden Daten an den jeweiligen Anbieter übermittelt; dafür ist dieser verantwortlich.</p>
+
+<h2>8. Ihre Rechte</h2>
+<p>Sie haben das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18), Datenübertragbarkeit (Art. 20) und Widerspruch gegen Verarbeitungen auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO (Art. 21). Wenden Sie sich dazu an <a href="mailto:contact@fatihdemirsoy.com">contact@fatihdemirsoy.com</a>. Außerdem können Sie sich bei einer Datenschutz-Aufsichtsbehörde beschweren, insbesondere in dem Mitgliedstaat Ihres Aufenthaltsorts.</p>
+
+<h2>9. Keine automatisierte Entscheidungsfindung</h2>
+<p>Eine automatisierte Entscheidungsfindung einschließlich Profiling findet nicht statt.</p></main>
+<footer>Fatih Demirsoy, contact@fatihdemirsoy.com</footer>
+</div></body></html>

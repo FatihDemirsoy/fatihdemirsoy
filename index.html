@@ -5,6 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Google Workspace’e mail taşıma | Fatih Demirsoy</title>
 <meta name="description" content="Şirket e-postanızı Yandex, cPanel veya diğer sağlayıcılardan Google Workspace’e taşıyorum. DNS, güvenlik ayarları ve kutu kutu mail sayımı dahil, sabit fiyat.">
+<link rel="canonical" href="https://fatihdemirsoy.com/">
+<link rel="alternate" hreflang="tr" href="https://fatihdemirsoy.com/">
+<link rel="alternate" hreflang="en" href="https://fatihdemirsoy.com/en/">
+<link rel="alternate" hreflang="az" href="https://fatihdemirsoy.com/az/">
+<link rel="alternate" hreflang="de" href="https://fatihdemirsoy.com/de/">
+<link rel="alternate" hreflang="fr" href="https://fatihdemirsoy.com/fr/">
+<link rel="alternate" hreflang="sv" href="https://fatihdemirsoy.com/sv/">
+<link rel="alternate" hreflang="ru" href="https://fatihdemirsoy.com/ru/">
+<link rel="alternate" hreflang="x-default" href="https://fatihdemirsoy.com/en/">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✉️</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -145,15 +154,25 @@ button.btn[disabled]{opacity:.6;cursor:wait}
 .status.ok{color:var(--ok)}.status.err{color:var(--diff)}
 .kvkk{font-size:.88rem;color:var(--muted);margin:0}
 .contact .alt{margin-top:2rem;color:var(--muted)}
+
+/* language switcher */
+.langs{display:flex;flex-wrap:wrap;gap:.15rem .6rem;font-size:.9rem;margin:0;padding:0;list-style:none}
+.langs a{color:var(--muted);text-decoration:none;padding:.15rem 0}
+.langs a:hover{color:var(--ink);text-decoration:underline}
+.langs a[aria-current="true"]{color:var(--ink);font-weight:700}
+.top{flex-wrap:wrap;gap:.75rem 1.5rem}
+.top-right{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1.25rem}
 </style>
 </head>
 <body>
 
 <div class="wrap">
   <header class="top">
-    <a class="name" href="#">Fatih Demirsoy</a>
-    <!-- WhatsApp numaranızı 90 ile başlayarak, boşluksuz yazın -->
-    <a class="small" href="https://wa.me/902622444189?text=Merhaba%2C%20Google%20Workspace%20ge%C3%A7i%C5%9Fi%20i%C3%A7in%20teklif%20almak%20istiyorum.">WhatsApp’tan yazın</a>
+    <a class="name" href="/">Fatih Demirsoy</a>
+    <div class="top-right">
+      <nav aria-label="Dil"><ul class="langs"><li><a href="/" hreflang="tr" lang="tr" aria-current="true">Türkçe</a></li><li><a href="/en/" hreflang="en" lang="en">English</a></li><li><a href="/az/" hreflang="az" lang="az">Azərbaycanca</a></li><li><a href="/de/" hreflang="de" lang="de">Deutsch</a></li><li><a href="/fr/" hreflang="fr" lang="fr">Français</a></li><li><a href="/sv/" hreflang="sv" lang="sv">Svenska</a></li><li><a href="/ru/" hreflang="ru" lang="ru">Русский</a></li></ul></nav>
+      <a class="small" href="https://wa.me/902622444189?text=Merhaba%2C%20Google%20Workspace%20ge%C3%A7i%C5%9Fi%20i%C3%A7in%20teklif%20almak%20istiyorum.">WhatsApp’tan yazın</a>
+    </div>
   </header>
 
   <main>
@@ -161,7 +180,7 @@ button.btn[disabled]{opacity:.6;cursor:wait}
       <div>
         <h1>Şirket mailinizi Google Workspace’e taşıyorum. Her kutuyu sayarak.</h1>
         <p class="lede">Yandex, cPanel, Plesk ya da başka bir sağlayıcıdan geçiş: DNS, kullanıcılar, güvenlik ayarları ve eski maillerin taşınması. Sabit fiyat, mail akışınız durmadan.</p>
-        <a class="btn" href="https://wa.me/902622444189?text=Merhaba%2C%20Google%20Workspace%20ge%C3%A7i%C5%9Fi%20i%C3%A7in%20teklif%20almak%20istiyorum.">WhatsApp’tan teklif isteyin</a>
+        <a class="btn" href="#iletisim">Teklif isteyin</a>
         <p class="under">Kullanıcı sayınızı ve şu anki mail sağlayıcınızı yazmanız yeterli.</p>
       </div>
 
@@ -214,8 +233,8 @@ button.btn[disabled]{opacity:.6;cursor:wait}
         </div>
         <div class="example">
           <h3>Örnek hesaplar</h3>
-          <p>10 kullanıcı: 4.000 + 5 × 350 = <strong>5.750 TL</strong></p>
-          <p>20 kullanıcı: 4.000 + 15 × 350 = <strong>9.250 TL</strong></p>
+          <p>10 kullanıcı: 4.000 TL + 5 × 350 TL = <strong>5.750 TL</strong></p>
+          <p>20 kullanıcı: 4.000 TL + 15 × 350 TL = <strong>9.250 TL</strong></p>
           <p>20 kullanıcı, 2 domain: <strong>10.250 TL</strong></p>
         </div>
       </div>
@@ -225,24 +244,11 @@ button.btn[disabled]{opacity:.6;cursor:wait}
       <div class="two">
         <div>
           <h3>Fiyata dahil</h3>
-          <ul class="plain">
-            <li>Workspace hesabının açılması ve domain doğrulama</li>
-            <li>Kullanıcıların açılması, şifre politikası, yönetici için iki adımlı doğrulama</li>
-            <li>MX, SPF, DKIM ve DMARC kurulumu ve testi</li>
-            <li>Eski maillerin taşınması ve son aktarım</li>
-            <li>Kutu kutu sayım raporu</li>
-            <li>Kullanıcılar için Gmail web ve mobil rehberi</li>
-            <li>Geçişten sonra 7 gün destek</li>
-          </ul>
+          <ul class="plain"><li>Workspace hesabının açılması ve domain doğrulama</li><li>Kullanıcıların açılması, şifre politikası, yönetici için iki adımlı doğrulama</li><li>MX, SPF, DKIM ve DMARC kurulumu ve testi</li><li>Eski maillerin taşınması ve son aktarım</li><li>Kutu kutu sayım raporu</li><li>Kullanıcılar için Gmail web ve mobil rehberi</li><li>Geçişten sonra 7 gün destek</li></ul>
         </div>
         <div>
           <h3>Ayrıca fiyatlanır</h3>
-          <ul class="plain">
-            <li>Outlook kurulumları</li>
-            <li>Dosyaların Drive’a taşınması</li>
-            <li>Geçişten sonra istenen grup ve alias düzenlemeleri</li>
-            <li>Kullanıcı eğitimi ve sürekli yönetim</li>
-          </ul>
+          <ul class="plain"><li>Outlook kurulumları</li><li>Dosyaların Drive’a taşınması</li><li>Geçişten sonra istenen grup ve alias düzenlemeleri</li><li>Kullanıcı eğitimi ve sürekli yönetim</li></ul>
         </div>
       </div>
     </section>
@@ -282,17 +288,15 @@ button.btn[disabled]{opacity:.6;cursor:wait}
         <p>Formu doldurun, aynı gün fiyatla dönerim. İsterseniz aynı bilgileri tek tuşla WhatsApp’tan da gönderebilirsiniz.</p>
       </div>
       <form class="quote" id="quote" novalidate>
-        <div class="field"><label for="f-ad">Ad soyad</label><input id="f-ad" name="Ad soyad" autocomplete="name" required></div>
-        <div class="field"><label for="f-firma">Firma <span class="opt">(isteğe bağlı)</span></label><input id="f-firma" name="Firma" autocomplete="organization"></div>
-        <div class="field"><label for="f-tel">Telefon</label><input id="f-tel" name="Telefon" type="tel" autocomplete="tel" inputmode="tel"></div>
-        <div class="field"><label for="f-mail">E-posta</label><input id="f-mail" name="E-posta" type="email" autocomplete="email"></div>
-        <div class="field"><label for="f-kul">Kullanıcı sayısı</label><input id="f-kul" name="Kullanıcı sayısı" type="number" min="1" inputmode="numeric" required></div>
-        <div class="field"><label for="f-dom">Alan adı sayısı</label><input id="f-dom" name="Alan adı sayısı" type="number" min="1" value="1" inputmode="numeric"></div>
+        <div class="field"><label for="f-ad">Ad soyad</label><input id="f-ad" data-k="name" autocomplete="name" required></div>
+        <div class="field"><label for="f-firma">Firma <span class="opt">(isteğe bağlı)</span></label><input id="f-firma" data-k="company" autocomplete="organization"></div>
+        <div class="field"><label for="f-tel">Telefon</label><input id="f-tel" data-k="phone" type="tel" autocomplete="tel" inputmode="tel"></div>
+        <div class="field"><label for="f-mail">E-posta</label><input id="f-mail" data-k="email" type="email" autocomplete="email"></div>
+        <div class="field"><label for="f-kul">Kullanıcı sayısı</label><input id="f-kul" data-k="users" type="number" min="1" inputmode="numeric" required></div>
+        <div class="field"><label for="f-dom">Alan adı sayısı</label><input id="f-dom" data-k="domains" type="number" min="1" value="1" inputmode="numeric"></div>
         <div class="field full"><label for="f-kay">Şu an hangi mail hizmetini kullanıyorsunuz?</label>
-          <select id="f-kay" name="Mevcut sağlayıcı">
-            <option>Yandex</option><option>Hosting maili (cPanel, Plesk)</option><option>Microsoft 365 / Outlook</option><option>Başka bir Google Workspace hesabı</option><option>Diğer / bilmiyorum</option>
-          </select></div>
-        <div class="field full"><label for="f-not">Eklemek istedikleriniz <span class="opt">(isteğe bağlı)</span></label><textarea id="f-not" name="Not"></textarea></div>
+          <select id="f-kay" data-k="source"><option>Yandex</option><option>Hosting maili (cPanel, Plesk)</option><option>Microsoft 365 / Outlook</option><option>Başka bir Google Workspace hesabı</option><option>Diğer / bilmiyorum</option></select></div>
+        <div class="field full"><label for="f-not">Eklemek istedikleriniz <span class="opt">(isteğe bağlı)</span></label><textarea id="f-not" data-k="note"></textarea></div>
         <div class="hp" aria-hidden="true"><label for="f-hp">Bu alanı boş bırakın</label><input id="f-hp" name="_honey" tabindex="-1" autocomplete="off"></div>
         <p class="kvkk full">Bilgileriniz yalnızca teklif hazırlamak için kullanılır, kimseyle paylaşılmaz.</p>
         <div class="actions full">
@@ -309,7 +313,6 @@ button.btn[disabled]{opacity:.6;cursor:wait}
 </div>
 
 <script>
-// Sayım tablosundaki sayılar sayfa açılırken bir kez sayarak yerine oturur.
 (function(){
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var cells = document.querySelectorAll('.count td[data-n]');
@@ -324,25 +327,27 @@ button.btn[disabled]{opacity:.6;cursor:wait}
   requestAnimationFrame(step);
 })();
 </script>
-
 <script>
 (function(){
+  var T = {"e_name": "Adınızı yazın.", "e_contact": "Size dönebilmem için telefon ya da e-posta yazın.", "e_email": "E-posta adresini kontrol edin.", "e_users": "Kullanıcı sayısını yazın, yaklaşık olması yeterli.", "sending": "Gönderiliyor…", "ok": "Teklif isteğiniz ulaştı. Aynı gün dönüş yapacağım.", "fail": "Gönderilemedi. “WhatsApp’tan gönder” düğmesini kullanın ya da bilgi@fatihdemirsoy.com adresine yazın.", "wa_intro": "Merhaba, Google Workspace geçişi için teklif almak istiyorum.", "code": "TR", "labels": {"name": "Ad soyad", "company": "Firma", "phone": "Telefon", "email": "E-posta", "users": "Kullanıcı sayısı", "domains": "Alan adı sayısı", "source": "Şu an hangi mail hizmetini kullanıyorsunuz", "note": "Eklemek istedikleriniz"}};
   var MAIL = "bilgi@fatihdemirsoy.com", WA = "902622444189";
   var form = document.getElementById("quote"), st = document.getElementById("status");
   var btn = document.getElementById("send-mail");
   function data(){
     var d = {};
-    Array.prototype.forEach.call(form.elements, function(el){
-      if (!el.name || el.name === "_honey" || el.type === "button" || el.type === "submit") return;
-      d[el.name] = el.value.trim();
-    });
+    form.querySelectorAll("[data-k]").forEach(function(el){ d[el.dataset.k] = el.value.trim(); });
     return d;
   }
+  function labeled(d){
+    var o = {};
+    Object.keys(d).forEach(function(k){ if (d[k]) o[T.labels[k]] = d[k]; });
+    return o;
+  }
   function check(d){
-    if (!d["Ad soyad"]) return "Adınızı yazın.";
-    if (!d["Telefon"] && !d["E-posta"]) return "Size dönebilmem için telefon ya da e-posta yazın.";
-    if (d["E-posta"] && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(d["E-posta"])) return "E-posta adresini kontrol edin.";
-    if (!d["Kullanıcı sayısı"]) return "Kullanıcı sayısını yazın, yaklaşık olması yeterli.";
+    if (!d.name) return T.e_name;
+    if (!d.phone && !d.email) return T.e_contact;
+    if (d.email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(d.email)) return T.e_email;
+    if (!d.users) return T.e_users;
     return "";
   }
   function say(msg, cls){ st.textContent = msg; st.className = "status full " + (cls || ""); }
@@ -351,26 +356,25 @@ button.btn[disabled]{opacity:.6;cursor:wait}
     if (form.elements["_honey"].value) return;
     var d = data(), err = check(d);
     if (err) { say(err, "err"); return; }
-    btn.disabled = true; say("Gönderiliyor…");
-    var body = Object.assign({}, d, {
-      _subject: "Workspace teklif isteği: " + (d["Firma"] || d["Ad soyad"]) + ", " + d["Kullanıcı sayısı"] + " kullanıcı",
+    btn.disabled = true; say(T.sending);
+    var body = Object.assign({ "Dil / Language": T.code }, labeled(d), {
+      _subject: "[" + T.code + "] Workspace teklif: " + (d.company || d.name) + ", " + d.users + " kullanıcı",
       _template: "table", _captcha: "false"
     });
-    if (d["E-posta"]) body._replyto = d["E-posta"];
+    if (d.email) body._replyto = d.email;
     fetch("https://formsubmit.co/ajax/" + MAIL, {
       method: "POST", headers: {"Content-Type":"application/json","Accept":"application/json"}, body: JSON.stringify(body)
     }).then(function(r){ return r.json(); }).then(function(j){
-      if (j && (j.success === true || j.success === "true")) { form.reset(); say("Teklif isteğiniz ulaştı. Aynı gün dönüş yapacağım.", "ok"); }
+      if (j && (j.success === true || j.success === "true")) { form.reset(); say(T.ok, "ok"); }
       else throw new Error();
-    }).catch(function(){
-      say("Gönderilemedi. “WhatsApp’tan gönder” düğmesini kullanın ya da " + MAIL + " adresine yazın.", "err");
-    }).finally(function(){ btn.disabled = false; });
+    }).catch(function(){ say(T.fail, "err"); })
+      .finally(function(){ btn.disabled = false; });
   });
   document.getElementById("send-wa").addEventListener("click", function(){
     var d = data(), err = check(d);
     if (err) { say(err, "err"); return; }
-    var lines = ["Merhaba, Google Workspace geçişi için teklif almak istiyorum.", ""];
-    Object.keys(d).forEach(function(k){ if (d[k]) lines.push(k + ": " + d[k]); });
+    var lines = [T.wa_intro, ""], l = labeled(d);
+    Object.keys(l).forEach(function(k){ lines.push(k + ": " + l[k]); });
     say("");
     window.open("https://wa.me/" + WA + "?text=" + encodeURIComponent(lines.join("\n")), "_blank", "noopener");
   });

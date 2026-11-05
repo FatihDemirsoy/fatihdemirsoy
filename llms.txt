@@ -1,0 +1,35 @@
+# Fatih Demirsoy – Google Workspace email migration
+
+> Fatih Demirsoy is a network and systems administrator who migrates company email to Google Workspace from Yandex 360, cPanel/Plesk hosting mail, Microsoft 365 and other IMAP providers. Fixed prices, fully remote, with a per-mailbox email count report at handover that shows nothing went missing.
+
+## Service
+- Included: Workspace account setup and domain verification; user creation; admin security (2-step verification, password policy); MX, SPF, DKIM and DMARC setup and testing; migration of all old email with folders plus a final sync; a per-mailbox count report comparing the old system with Workspace; a one-page Gmail guide for users; 7 days of support.
+- Priced separately: Outlook setup, moving files to Drive, group and alias changes after the switch, training, monthly management.
+- Typical duration 1–3 days. The old system stays on until the migration is verified, so mail flow is not interrupted.
+- The customer owns the main admin account and pays the Google Workspace licence directly to Google.
+- Payment: half at the start, half on the day the MX record is switched. International customers: bank transfer or Payoneer (Payoneer is not available to residents of Russia and Belarus).
+- Languages: Turkish, English, Indonesian, Azerbaijani, German, French, Swedish, Russian.
+
+## Prices
+- Türkiye (TRY, VAT excluded): setup including 5 users 4000 TL; each additional user 350 TL; additional domain 1000 TL; Outlook setup 250 TL per user; monthly management 1500 TL per month.
+- International (USD): setup including 5 users $80; each additional user $7; additional domain $20; Outlook setup $5 per user; monthly management $30 per month.
+
+## Reference project
+- 2 domains and 38 mailboxes merged into one Workspace account, migrated from Yandex 360. The migration tool reported one mailbox as completed while 4,400 emails were missing; the count check caught it before handover.
+
+## Contact
+- Quote form on every page below; WhatsApp: +90 262 244 41 89; email: contact@fatihdemirsoy.com (Turkish: bilgi@fatihdemirsoy.com)
+
+## Pages
+- [Türkçe](https://fatihdemirsoy.com/): Şirket e-postalarınızı Yandex, cPanel, Plesk veya Microsoft 365’ten Google Workspace’e taşıyorum. DNS ayarları, güvenlik ve her kutu için mail sayımı dahil, sabit fiyatla.
+- [English](https://fatihdemirsoy.com/en/): I move your company email from Yandex, cPanel, Microsoft 365 or any other provider to Google Workspace. DNS, security settings and a per-mailbox email count included, at a fixed price.
+- [Bahasa Indonesia](https://fatihdemirsoy.com/id/): Saya memindahkan email perusahaan Anda dari Yandex, cPanel, Microsoft 365 atau penyedia lain ke Google Workspace. Termasuk DNS, pengaturan keamanan, dan penghitungan email per kotak surat, dengan harga tetap.
+- [Azərbaycanca](https://fatihdemirsoy.com/az/): Şirkət e-poçtunuzu Yandex, cPanel, Microsoft 365 və ya digər provayderlərdən Google Workspace-ə köçürürəm. DNS, təhlükəsizlik ayarları və hər qutu üzrə məktub sayı daxil olmaqla, sabit qiymətlə.
+- [Deutsch](https://fatihdemirsoy.com/de/): Ich ziehe Ihre Firmen-E-Mails von Yandex, cPanel, Microsoft 365 oder einem anderen Anbieter zu Google Workspace um. DNS, Sicherheitseinstellungen und eine Zählung pro Postfach inklusive, zum Festpreis.
+- [Français](https://fatihdemirsoy.com/fr/): Je migre la messagerie de votre entreprise depuis Yandex, cPanel, Microsoft 365 ou tout autre fournisseur vers Google Workspace. DNS, sécurité et comptage par boîte inclus, à prix fixe.
+- [Svenska](https://fatihdemirsoy.com/sv/): Jag flyttar företagets e-post från Yandex, cPanel, Microsoft 365 eller annan leverantör till Google Workspace. DNS, säkerhetsinställningar och räkning per brevlåda ingår, till fast pris.
+- [Русский](https://fatihdemirsoy.com/ru/): Переношу корпоративную почту из Яндекс 360, cPanel, Microsoft 365 и других сервисов в Google Workspace. DNS, настройки безопасности и подсчёт писем по каждому ящику, по фиксированной цене.
+
+## Optional
+- [Privacy policy](https://fatihdemirsoy.com/en/privacy/)
+- [Datenschutzerklärung](https://fatihdemirsoy.com/de/datenschutz/)

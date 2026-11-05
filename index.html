@@ -257,6 +257,24 @@ figure.report{margin:0}
   .price tr.main td{font-size:1.05rem}
   .contact{padding:3rem 0 3.5rem}
 }
+
+/* estimate + payment */
+.estimate{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:1rem 1.1rem}
+.estimate h3{margin:0 0 .5rem;font-size:1rem}
+.estimate dl{margin:0;display:grid;gap:.35rem}
+.estimate dl div{display:flex;justify-content:space-between;gap:1rem}
+.estimate dt{color:var(--muted)}
+.estimate dd{margin:0;font-weight:700;text-align:right}
+.e-custom{margin:.6rem 0 0;color:var(--muted);font-size:.95rem}
+.paybox{max-width:40rem;margin-top:1.5rem;border:2px solid var(--ok);border-radius:14px;padding:1.25rem 1.3rem;background:var(--surface)}
+.paybox h3{margin:0 0 .5rem}
+.paybox .bank{margin:1rem 0;display:grid;gap:.6rem}
+.paybox .bank div{display:flex;flex-wrap:wrap;align-items:center;gap:.25rem .75rem}
+.paybox .bank dt{color:var(--muted);min-width:9rem}
+.paybox .bank dd{margin:0;font-weight:700;overflow-wrap:anywhere}
+.copy{font:inherit;font-size:.85rem;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:999px;padding:.3rem .75rem;cursor:pointer;min-height:36px}
+.paybox .btn{margin:1rem 0 .5rem}
+@media (max-width:40rem){.paybox .bank dt{min-width:0;width:100%}}
 </style>
 </head>
 <body>
@@ -397,6 +415,15 @@ figure.report{margin:0}
           <select id="f-kay" data-k="source"><option>Yandex</option><option>Hosting maili (cPanel, Plesk)</option><option>Microsoft 365 / Outlook</option><option>Başka bir Google Workspace hesabı</option><option>Diğer / bilmiyorum</option></select></div>
         <div class="field full"><label for="f-not">Eklemek istedikleriniz <span class="opt">(isteğe bağlı)</span></label><textarea id="f-not" data-k="note"></textarea></div>
         <div class="hp" aria-hidden="true"><label for="f-hp">Bu alanı boş bırakın</label><input id="f-hp" name="_honey" tabindex="-1" autocomplete="off"></div>
+        <div class="estimate full" id="estimate" aria-live="polite">
+          <h3>Fiyat özeti</h3>
+          <dl>
+            <div><dt>Toplam (KDV hariç)</dt><dd id="e-total">–</dd></div>
+            <div><dt>Kapora</dt><dd id="e-dep">–</dd></div>
+            <div><dt>Kalan, geçiş günü</dt><dd id="e-rest">–</dd></div>
+          </dl>
+          <p class="e-custom" id="e-custom" hidden>40’tan fazla kullanıcı için ödemeden önce size özel teklif hazırlıyorum.</p>
+        </div>
         <p class="kvkk full">Bilgileriniz yalnızca teklif hazırlamak için kullanılır ve kimseyle paylaşılmaz.</p>
         <div class="actions full">
           <button class="btn" type="submit" id="send-mail">Teklif isteğini gönder</button>
@@ -404,6 +431,12 @@ figure.report{margin:0}
         </div>
         <p class="status full" id="status" role="status" aria-live="polite"></p>
       </form>
+      <div class="paybox" id="paybox" hidden>
+        <h3>Kapora ödemesi</h3>
+        <p id="pay-ok"></p>
+        <dl class="bank"><div><dt>Alıcı</dt><dd id="p-holder">FATİH DEMİRSOY</dd></div><div><dt>Banka</dt><dd>Garanti BBVA, Darıca Şubesi</dd></div><div><dt>IBAN</dt><dd id="p-iban">TR60 0006 2000 6800 0006 2960 03</dd><button type="button" class="copy" data-copy="p-iban">Kopyala</button></div><div><dt>Tutar (KDV dahil)</dt><dd id="p-amt"></dd></div><div><dt>Açıklama</dt><dd id="p-ref"></dd><button type="button" class="copy" data-copy="p-ref">Kopyala</button></div></dl><p class="fine">Havale veya FAST ile gönderebilirsiniz. Açıklamaya kodu yazarsanız ödemenizi hemen eşleştiririm. Kalan tutar MX geçiş günü faturalanır.</p>
+        <p class="fine">Ön incelemede kapsam farklı çıkarsa kaporayı tamamen iade ederim.</p>
+      </div>
       <p class="alt">Doğrudan e-posta göndermek isterseniz: <a href="mailto:bilgi@fatihdemirsoy.com">bilgi@fatihdemirsoy.com</a></p>
     </section>
   </main>
@@ -429,6 +462,7 @@ figure.report{margin:0}
 <script>
 (function(){
   var T = {"e_name": "Adınızı yazın.", "e_contact": "Size dönebilmem için e-posta adresinizi yazın.", "e_email": "E-posta adresini kontrol edin.", "e_users": "Kullanıcı sayısını yazın, yaklaşık olması yeterli.", "sending": "Gönderiliyor…", "ok": "Teklif isteğiniz ulaştı. Aynı gün dönüş yapacağım.", "fail": "Gönderilemedi. “WhatsApp’tan gönder” düğmesini kullanın ya da bilgi@fatihdemirsoy.com adresine yazın.", "wa_intro": "Merhaba, Google Workspace geçişi için teklif almak istiyorum.", "code": "TR", "labels": {"name": "Ad soyad", "company": "Firma", "phone": "Telefon", "email": "E-posta", "users": "Kullanıcı sayısı", "domains": "Alan adı sayısı", "source": "Şu an hangi mail hizmetini kullanıyorsunuz", "note": "Eklemek istedikleriniz"}};
+  var P = {"cur": "TRY", "main": 4000, "user": 350, "dom": 1000, "locale": "tr-TR", "after_ok": "Teklif isteğiniz ulaştı. Yerinizi ayırtmak için kaporayı şimdi gönderebilir ya da dönüşümü bekleyebilirsiniz.", "copied": "Kopyalandı", "fmt": "%N% TL", "vat": 0.2, "plus_vat": "+ KDV"};
   var MAIL = "bilgi@fatihdemirsoy.com", WA = "902622444189";
   var form = document.getElementById("quote"), st = document.getElementById("status");
   var btn = document.getElementById("send-mail");
@@ -449,6 +483,43 @@ figure.report{margin:0}
     if (!d.users) return T.e_users;
     return "";
   }
+  function fmt(n){ return P.fmt.replace("%N%", new Intl.NumberFormat(P.locale).format(n)); }
+  function calc(d){
+    var u = Math.max(1, parseInt(d.users, 10) || 0), dm = Math.max(1, parseInt(d.domains, 10) || 1);
+    var total = P.main + Math.max(0, u - 5) * P.user + (dm - 1) * P.dom, dep = null, link = null;
+    if (P.cur === "TRY") { dep = Math.round(total / 2); }
+    else { for (var i = 0; i < P.tiers.length; i++) if (u <= P.tiers[i][0]) { dep = P.tiers[i][1]; link = P.tiers[i][2]; break; } }
+    return { users: u, total: total, dep: dep, link: link, rest: dep == null ? null : total - dep };
+  }
+  var ref = "WS-" + Math.random().toString(36).slice(2, 6).toUpperCase();
+  function showEstimate(){
+    var d = data(), c = calc(d), has = !!d.users;
+    document.getElementById("e-total").textContent = has ? fmt(c.total) : "–";
+    document.getElementById("e-dep").textContent = has && c.dep != null ? fmt(c.dep) + (P.cur === "TRY" ? " " + P.plus_vat : "") : "–";
+    document.getElementById("e-rest").textContent = has && c.rest != null ? fmt(c.rest) + (P.cur === "TRY" ? " " + P.plus_vat : "") : "–";
+    document.getElementById("e-custom").hidden = !(has && c.dep == null);
+    return c;
+  }
+  form.addEventListener("input", showEstimate);
+  function showPay(c){
+    var box = document.getElementById("paybox");
+    if (c.dep == null) return;
+    document.getElementById("pay-ok").textContent = T.after_ok;
+    if (P.cur === "TRY") {
+      document.getElementById("p-amt").textContent = fmt(Math.round(c.dep * (1 + P.vat)));
+      document.getElementById("p-ref").textContent = ref;
+    } else {
+      var a = document.getElementById("p-btn");
+      a.href = c.link; a.textContent = P.pay_btn.replace("{amt}", fmt(c.dep));
+    }
+    box.hidden = false; box.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+  document.querySelectorAll("[data-copy]").forEach(function(b){
+    b.addEventListener("click", function(){
+      var v = document.getElementById(b.getAttribute("data-copy")).textContent.replace(/\s/g, b.getAttribute("data-copy") === "p-iban" ? "" : " ");
+      (navigator.clipboard ? navigator.clipboard.writeText(v) : Promise.reject()).then(function(){ var o = b.textContent; b.textContent = P.copied; setTimeout(function(){ b.textContent = o; }, 1500); }).catch(function(){});
+    });
+  });
   function say(msg, cls){ st.textContent = msg; st.className = "status full " + (cls || ""); }
   form.addEventListener("submit", function(e){
     e.preventDefault();
@@ -456,15 +527,18 @@ figure.report{margin:0}
     var d = data(), err = check(d);
     if (err) { say(err, "err"); return; }
     btn.disabled = true; say(T.sending);
+    var c = calc(d), payInfo = c.dep == null ? "Özel teklif (40+ kullanıcı)" :
+      (P.cur === "TRY" ? fmt(Math.round(c.dep * (1 + P.vat))) + " KDV dahil, havale kodu " + ref : fmt(c.dep) + " Payoneer linki gösterildi, ödeme gelirse linki yenile");
     var body = Object.assign({ "Dil / Language": T.code }, labeled(d), {
-      _subject: "[" + T.code + "] Workspace teklif: " + (d.company || d.name) + ", " + d.users + " kullanıcı",
+      "Tahmini toplam": fmt(c.total) + (P.cur === "TRY" ? " + KDV" : ""), "Kapora": payInfo,
+      _subject: "[" + T.code + "] Workspace teklif: " + (d.company || d.name) + ", " + d.users + " kullanıcı" + (c.dep == null ? "" : " | kapora " + fmt(c.dep)),
       _honey: form.elements["_honey"].value
     });
     if (d.email) body._replyto = d.email;
     fetch("https://script.google.com/macros/s/AKfycbzcPHHYqWLshnFVDFwEO08vo9cAI4XnQrgLY2ycZ1ZEwy4fMvMlPPZNffogDO5cpuJ2/exec", {
       method: "POST", body: JSON.stringify(body)
     }).then(function(r){ return r.json(); }).then(function(j){
-      if (j && (j.success === true || j.success === "true")) { form.reset(); say(T.ok, "ok"); }
+      if (j && (j.success === true || j.success === "true")) { say(T.ok, "ok"); showPay(c); }
       else throw new Error((j && j.message) || "unknown");
     }).catch(function(err){ console.error("Form gonderim hatasi:", err && err.message); say(T.fail, "err"); })
       .finally(function(){ btn.disabled = false; });

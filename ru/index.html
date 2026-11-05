@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Перенос почты в Google Workspace | Fatih Demirsoy</title>
+
 <meta name="description" content="Переношу корпоративную почту из Яндекс 360, cPanel, Microsoft 365 и других сервисов в Google Workspace. DNS, настройки безопасности и подсчёт писем по каждому ящику, по фиксированной цене.">
 <link rel="canonical" href="https://fatihdemirsoy.com/ru/">
 <link rel="alternate" hreflang="tr" href="https://fatihdemirsoy.com/">
@@ -380,6 +381,11 @@ button.btn[disabled]{opacity:.6;cursor:wait}
     window.open("https://wa.me/" + WA + "?text=" + encodeURIComponent(lines.join("\n")), "_blank", "noopener");
   });
 })();
+</script>
+<script>
+document.querySelectorAll('.langs a[hreflang]').forEach(function(a){
+  a.addEventListener('click', function(){ try { localStorage.setItem('site-lang', a.getAttribute('hreflang')); } catch(e){} });
+});
 </script>
 </body>
 </html>

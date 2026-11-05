@@ -108,7 +108,7 @@ ul.plain li{margin-bottom:.45rem}
 
 .case{display:grid;gap:2rem}
 @media (min-width:56rem){.case{grid-template-columns:.8fr 1.2fr;gap:4rem}}
-.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:0}
+.facts{display:flex;flex-wrap:wrap;gap:1rem 1.75rem;margin:0}
 .facts div{border-left:3px solid var(--ok);padding-left:.75rem}
 .facts dt{font-size:.9rem;color:var(--muted)}
 .facts dd{margin:0;font-size:1.9rem;font-weight:800;line-height:1.1}
@@ -177,7 +177,7 @@ button.btn[disabled]{opacity:.6;cursor:wait}
 figure.report{margin:0}
 .hero>*,.prices>*,.two>*,.case>*{min-width:0}
 .count td.note{font-variant-numeric:normal}
-.facts dd{overflow-wrap:anywhere}
+
 
 @media (max-width:40rem){
   .wrap{padding:0 1rem}
@@ -195,14 +195,32 @@ figure.report{margin:0}
   .count th{font-size:.78rem}
   .st{white-space:normal}
   section.block{padding:2.5rem 0}
-  .facts dd{font-size:1.5rem}
   .actions .btn{width:100%}
   .price tr.main td{font-size:1.05rem}
   .contact{padding:3rem 0 3.5rem}
 }
 
+/* estimate + payment */
+.estimate{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:1rem 1.1rem}
+.estimate h3{margin:0 0 .5rem;font-size:1rem}
+.estimate dl{margin:0;display:grid;gap:.35rem}
+.estimate dl div{display:flex;justify-content:space-between;gap:1rem}
+.estimate dt{color:var(--muted)}
+.estimate dd{margin:0;font-weight:700;text-align:right}
+.e-custom{margin:.6rem 0 0;color:var(--muted);font-size:.95rem}
+.paybox{max-width:40rem;margin-top:1.5rem;border:2px solid var(--ok);border-radius:14px;padding:1.25rem 1.3rem;background:var(--surface)}
+.paybox h3{margin:0 0 .5rem}
+.paybox .bank{margin:1rem 0;display:grid;gap:.6rem}
+.paybox .bank div{display:flex;flex-wrap:wrap;align-items:center;gap:.25rem .75rem}
+.paybox .bank dt{color:var(--muted);min-width:9rem}
+.paybox .bank dd{margin:0;font-weight:700;overflow-wrap:anywhere}
+.copy{font:inherit;font-size:.85rem;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:999px;padding:.3rem .75rem;cursor:pointer;min-height:36px}
+.paybox .btn{margin:1rem 0 .5rem}
+@media (max-width:40rem){.paybox .bank dt{min-width:0;width:100%}}
+
 .legal{max-width:44rem;padding:2rem 0 4rem}
-.legal h1{font-size:clamp(1.9rem,4vw,2.6rem);margin-bottom:.5rem}
+.legal h1{font-size:clamp(1.55rem,6.5vw,2.6rem);margin-bottom:.5rem;hyphens:auto;-webkit-hyphens:auto}
+.nw{white-space:nowrap}
 .legal h2{font-size:1.2rem;margin:2.2rem 0 .6rem}
 .legal p,.legal li{color:var(--ink)}
 .legal .stand{color:var(--muted);margin-bottom:2rem}
@@ -240,5 +258,5 @@ figure.report{margin:0}
 
 <h2>9. Keine automatisierte Entscheidungsfindung</h2>
 <p>Eine automatisierte Entscheidungsfindung einschließlich Profiling findet nicht statt.</p></main>
-<footer>Fatih Demirsoy, contact@fatihdemirsoy.com</footer>
+<footer>Fatih Demirsoy, <a href="mailto:contact@fatihdemirsoy.com">contact@fatihdemirsoy.com</a></footer>
 </div></body></html>

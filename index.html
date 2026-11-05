@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Google Workspace’e mail taşıma | Fatih Demirsoy</title>
+<meta name="description" content="Şirket e-postanızı Yandex, cPanel veya diğer sağlayıcılardan Google Workspace’e taşıyorum. DNS, güvenlik ayarları ve kutu kutu mail sayımı dahil, sabit fiyat.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✉️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EDF1EF; --surface:#F8FAF9; --ink:#1B2A31; --muted:#56666D;
+  --line:#C9D3CF; --ok:#0E7A63; --diff:#A3245A; --accent:#1E4FBF; --on-accent:#FFFFFF;
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#121A1E; --surface:#1A252A; --ink:#E4ECE9; --muted:#9AAAA6;
+    --line:#2E3D43; --ok:#3FC7A4; --diff:#F07AAB; --accent:#7EA2FF; --on-accent:#0D1620;
+    color-scheme:dark;
+  }
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Schibsted Grotesk",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  font-size:1.0625rem;line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:68rem;margin:0 auto;padding:0 1.25rem}
+.measure{max-width:38rem}
+
+/* header */
+.top{display:flex;justify-content:space-between;align-items:center;padding:1.25rem 0}
+.name{font-weight:800;letter-spacing:-.01em;text-decoration:none;color:var(--ink)}
+.top a.small{font-size:.95rem}
+
+/* hero */
+.hero{display:grid;gap:2.5rem;padding:2.5rem 0 4rem;align-items:center}
+@media (min-width:60rem){.hero{grid-template-columns:1fr 1.05fr;gap:3.5rem;padding:4rem 0 5.5rem}}
+h1{
+  font-size:clamp(2.1rem,5.2vw,3.4rem);line-height:1.05;letter-spacing:-.025em;
+  font-weight:800;margin:0 0 1.25rem;
+}
+.lede{font-size:1.2rem;color:var(--muted);margin:0 0 2rem;max-width:32rem}
+.btn{
+  display:inline-block;background:var(--accent);color:var(--on-accent);
+  font-weight:700;text-decoration:none;padding:.9rem 1.4rem;border-radius:999px;
+}
+.btn:hover{filter:brightness(1.08)}
+.under{font-size:.95rem;color:var(--muted);margin-top:1rem}
+
+/* the count report: the memorable element */
+.report{
+  background:var(--surface);border:1px solid var(--line);border-radius:14px;
+  padding:1.25rem 1.25rem .75rem;
+}
+.report h2{font-size:1rem;margin:0 0 .25rem;font-weight:700;letter-spacing:0}
+.report p.cap{font-size:.9rem;color:var(--muted);margin:0 0 1rem}
+.scroll{overflow-x:auto}
+table.count{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:.98rem;min-width:24rem}
+.count th{font-size:.85rem;font-weight:500;color:var(--muted);text-align:right;padding:.4rem .5rem;border-bottom:1px solid var(--line)}
+.count th:first-child,.count td:first-child{text-align:left}
+.count td{padding:.6rem .5rem;text-align:right;border-bottom:1px solid var(--line)}
+.count tr:last-child td{border-bottom:0}
+.count td.who{font-weight:500}
+.st{font-weight:700;white-space:nowrap}
+.st.ok{color:var(--ok)}
+.st.diff{color:var(--diff)}
+.note{font-size:.85rem;color:var(--muted);text-align:left!important;padding-top:0!important;border-bottom:1px solid var(--line)}
+
+/* sections */
+section.block{padding:3.5rem 0;border-top:1px solid var(--line)}
+h2.sec{font-size:clamp(1.6rem,3.2vw,2.2rem);line-height:1.15;letter-spacing:-.02em;margin:0 0 1rem;font-weight:800}
+.block p{margin:0 0 1rem}
+
+ol.steps{list-style:none;padding:0;margin:2rem 0 0;display:grid;gap:1.75rem;counter-reset:s}
+@media (min-width:48rem){ol.steps{grid-template-columns:repeat(4,1fr)}}
+ol.steps li{counter-increment:s;border-top:3px solid var(--ink);padding-top:.9rem}
+ol.steps li::before{content:counter(s);display:block;font-weight:800;font-size:1.6rem;line-height:1;margin-bottom:.6rem}
+ol.steps h3{font-size:1.05rem;margin:0 0 .35rem}
+ol.steps p{font-size:.97rem;color:var(--muted);margin:0}
+
+.prices{display:grid;gap:2.5rem}
+@media (min-width:56rem){.prices{grid-template-columns:1.2fr 1fr;gap:4rem}}
+table.price{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.price td{padding:.85rem 0;border-bottom:1px solid var(--line);vertical-align:top}
+.price td:last-child{text-align:right;font-weight:700;white-space:nowrap;padding-left:1rem}
+.price tr.main td{font-size:1.15rem}
+.price small{display:block;color:var(--muted);font-weight:400;font-size:.9rem}
+.fine{font-size:.92rem;color:var(--muted);margin-top:1rem}
+.example{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1.25rem 1.4rem}
+.example h3{margin:0 0 .75rem;font-size:1.05rem}
+.example p{margin:0 0 .5rem;font-variant-numeric:tabular-nums}
+.example p:last-child{margin:0}
+
+.two{display:grid;gap:2rem}
+@media (min-width:48rem){.two{grid-template-columns:1fr 1fr;gap:3.5rem}}
+.two h3{font-size:1.1rem;margin:0 0 .75rem}
+ul.plain{margin:0;padding-left:1.1rem}
+ul.plain li{margin-bottom:.45rem}
+
+.case{display:grid;gap:2rem}
+@media (min-width:56rem){.case{grid-template-columns:.8fr 1.2fr;gap:4rem}}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:0}
+.facts div{border-left:3px solid var(--ok);padding-left:.75rem}
+.facts dt{font-size:.9rem;color:var(--muted)}
+.facts dd{margin:0;font-size:1.9rem;font-weight:800;line-height:1.1}
+
+details{border-bottom:1px solid var(--line);padding:1rem 0}
+details summary{cursor:pointer;font-weight:700;list-style-position:outside}
+details p{margin:.6rem 0 0;color:var(--muted)}
+
+.contact{padding:4rem 0 5rem;border-top:1px solid var(--line)}
+.contact .row{display:flex;flex-wrap:wrap;gap:1rem 1.5rem;align-items:center;margin-top:1.5rem}
+footer{font-size:.9rem;color:var(--muted);padding:1.5rem 0 2.5rem;border-top:1px solid var(--line)}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <a class="name" href="#">Fatih Demirsoy</a>
+    <!-- WhatsApp numaranızı 90 ile başlayarak, boşluksuz yazın -->
+    <a class="small" href="https://wa.me/902622444189?text=Merhaba%2C%20Google%20Workspace%20ge%C3%A7i%C5%9Fi%20i%C3%A7in%20teklif%20almak%20istiyorum.">WhatsApp’tan yazın</a>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div>
+        <h1>Şirket mailinizi Google Workspace’e taşıyorum. Her kutuyu sayarak.</h1>
+        <p class="lede">Yandex, cPanel, Plesk ya da başka bir sağlayıcıdan geçiş: DNS, kullanıcılar, güvenlik ayarları ve eski maillerin taşınması. Sabit fiyat, mail akışınız durmadan.</p>
+        <a class="btn" href="https://wa.me/902622444189?text=Merhaba%2C%20Google%20Workspace%20ge%C3%A7i%C5%9Fi%20i%C3%A7in%20teklif%20almak%20istiyorum.">WhatsApp’tan teklif isteyin</a>
+        <p class="under">Kullanıcı sayınızı ve şu anki mail sağlayıcınızı yazmanız yeterli.</p>
+      </div>
+
+      <figure class="report" aria-labelledby="rep-title">
+        <h2 id="rep-title">Teslimde aldığınız sayım raporu</h2>
+        <p class="cap">Örnek. Her kutu için eski sistemdeki ve Workspace’teki mail sayısını karşılaştırıyorum.</p>
+        <div class="scroll">
+          <table class="count">
+            <thead><tr><th scope="col">Kutu</th><th scope="col">Eski sistem</th><th scope="col">Workspace</th><th scope="col">Durum</th></tr></thead>
+            <tbody>
+              <tr><td class="who">satis@</td><td data-n="12480">12.480</td><td data-n="12480">12.480</td><td class="st ok">Eşleşti</td></tr>
+              <tr><td class="who">info@</td><td data-n="8915">8.915</td><td data-n="8915">8.915</td><td class="st ok">Eşleşti</td></tr>
+              <tr><td class="who">muhasebe@</td><td data-n="31207">31.207</td><td data-n="31189">31.189</td><td class="st diff">18 fark</td></tr>
+              <tr><td colspan="4" class="note">Fark: 18 mail eski sistemde virüslü olarak işaretli. Raporda tek tek listelendi.</td></tr>
+              <tr><td class="who">yonetim@</td><td data-n="9402">9.402</td><td data-n="9402">9.402</td><td class="st ok">Yeniden taşındı</td></tr>
+              <tr><td colspan="4" class="note">Taşıma aracı “tamamlandı” dedi ama 4.400 mail eksikti. Sayımda yakalandı.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+    </div>
+
+    <section class="block" id="surec">
+      <div class="measure">
+        <h2 class="sec">Geçiş nasıl ilerliyor</h2>
+        <p>Çoğu iş 1–3 gün sürer. Eski sisteminiz, taşıma doğrulanana kadar kapatılmaz.</p>
+      </div>
+      <ol class="steps">
+        <li><h3>Ön inceleme</h3><p>Kutuları, alias’ları, mail hacmini ve DNS’in nerede durduğunu çıkarıyorum.</p></li>
+        <li><h3>Hesap ve DNS</h3><p>Domain doğrulama, kullanıcılar, MX, SPF, DKIM ve DMARC. Yönetici güvenliği ayarları.</p></li>
+        <li><h3>Taşıma</h3><p>Eski mailler klasörleriyle taşınır. Geçiş anında gelenler için ikinci bir aktarım yapılır.</p></li>
+        <li><h3>Sayım ve teslim</h3><p>Kutu kutu sayım raporu, kullanıcılar için tek sayfalık Gmail rehberi ve 7 gün destek.</p></li>
+      </ol>
+    </section>
+
+    <section class="block" id="fiyat">
+      <div class="prices">
+        <div>
+          <h2 class="sec">Fiyatlar</h2>
+          <table class="price">
+            <tbody>
+              <tr class="main"><td>Kurulum, DNS, güvenlik ve 5 kullanıcının taşınması</td><td>4.000 TL</td></tr>
+              <tr><td>Her ek kullanıcı<small>Taşıma ve sayım kontrolü dahil</small></td><td>350 TL</td></tr>
+              <tr><td>Ek domain<small>Aynı Workspace hesabına ikinci alan adı</small></td><td>1.000 TL</td></tr>
+              <tr><td>Outlook kurulumu<small>İsteyen kullanıcı başına</small></td><td>250 TL</td></tr>
+              <tr><td>Aylık yönetim ve destek<small>Yeni kullanıcı, şifre, güvenlik, sorun çözme</small></td><td>1.500 TL / ay</td></tr>
+            </tbody>
+          </table>
+          <p class="fine">Fiyatlara KDV dahil değildir. Google Workspace lisansını doğrudan Google’a siz ödersiniz.</p>
+        </div>
+        <div class="example">
+          <h3>Örnek hesaplar</h3>
+          <p>10 kullanıcı: 4.000 + 5 × 350 = <strong>5.750 TL</strong></p>
+          <p>20 kullanıcı: 4.000 + 15 × 350 = <strong>9.250 TL</strong></p>
+          <p>20 kullanıcı, 2 domain: <strong>10.250 TL</strong></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="kapsam">
+      <div class="two">
+        <div>
+          <h3>Fiyata dahil</h3>
+          <ul class="plain">
+            <li>Workspace hesabının açılması ve domain doğrulama</li>
+            <li>Kullanıcıların açılması, şifre politikası, yönetici için iki adımlı doğrulama</li>
+            <li>MX, SPF, DKIM ve DMARC kurulumu ve testi</li>
+            <li>Eski maillerin taşınması ve son aktarım</li>
+            <li>Kutu kutu sayım raporu</li>
+            <li>Kullanıcılar için Gmail web ve mobil rehberi</li>
+            <li>Geçişten sonra 7 gün destek</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Ayrıca fiyatlanır</h3>
+          <ul class="plain">
+            <li>Outlook kurulumları</li>
+            <li>Dosyaların Drive’a taşınması</li>
+            <li>Geçişten sonra istenen grup ve alias düzenlemeleri</li>
+            <li>Kullanıcı eğitimi ve sürekli yönetim</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="referans">
+      <div class="case">
+        <div>
+          <h2 class="sec">Son yaptığım geçiş</h2>
+          <dl class="facts">
+            <div><dt>Domain</dt><dd>2</dd></div>
+            <div><dt>Kutu</dt><dd>38</dd></div>
+            <div><dt>Kaynak</dt><dd>Yandex</dd></div>
+          </dl>
+        </div>
+        <div class="measure">
+          <p>İki alan adını tek Workspace hesabında birleştirdim. Rol adresleri (info, satış, destek) kendi kutularıyla taşındı, kullanıcılar Gmail web ve mobil uygulamaya geçti.</p>
+          <p>Taşıma aracı bir kutuyu “tamamlandı” gösterdi, oysa 4.400 mail gelmemişti. Sayım kontrolü bu yüzden pakette: eksik varsa teslimden önce görülür.</p>
+          <p>Eski sistemde zaten açılmayan, içeriği kaybolmuş mailler de raporda ayrıca listelendi. Yönetim neyin taşınıp neyin baştan bozuk olduğunu net gördü.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="sss">
+      <div class="measure">
+        <h2 class="sec">Sık sorulanlar</h2>
+        <details><summary>Geçiş sırasında mail alamaz mıyız?</summary><p>Alırsınız. MX kaydı değişene kadar mailler eski sisteme gelir, değiştikten sonra Workspace’e. Arada düşenler son aktarımla taşınır.</p></details>
+        <details><summary>Hesabın yöneticisi kim olur?</summary><p>Siz. Ana yönetici hesabı baştan sizde açılır, ben ikinci yönetici olurum. İşimiz bitince yetkimi kaldırabilirsiniz.</p></details>
+        <details><summary>Ödeme nasıl?</summary><p>Yarısı iş başlarken, kalanı MX kaydının değiştirildiği gün. Fatura kesilir.</p></details>
+        <details><summary>Eski sistemde bozuk olan mailler ne olur?</summary><p>Eski sağlayıcıda zaten açılmayan veya içeriği kaybolmuş mailler taşınamaz. Bunları raporda ayrıca gösteririm, böylece neyin eksik geldiğini değil neyin baştan bozuk olduğunu bilirsiniz.</p></details>
+        <details><summary>Ben uzaktayım, siz de uzaktasınız. Sorun olur mu?</summary><p>Olmaz. İşin tamamı uzaktan yapılır. Size düşen DNS paneline erişim vermek ve kullanıcılara yeni şifrelerini iletmek.</p></details>
+      </div>
+    </section>
+
+    <section class="contact" id="iletisim">
+      <div class="measure">
+        <h2 class="sec">Teklif isteyin</h2>
+        <p>Kaç kullanıcınız olduğunu, şu an hangi sağlayıcıyı kullandığınızı ve kaç alan adınız olduğunu yazın. Aynı gün fiyatla dönerim.</p>
+      </div>
+      <div class="row">
+        <a class="btn" href="https://wa.me/902622444189?text=Merhaba%2C%20Google%20Workspace%20ge%C3%A7i%C5%9Fi%20i%C3%A7in%20teklif%20almak%20istiyorum.">WhatsApp’tan yazın</a>
+        <!-- E-posta adresinizi buraya yazın -->
+        <a href="mailto:bilgi@fatihdemirsoy.com">bilgi@fatihdemirsoy.com</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>Fatih Demirsoy, ağ, sistem ve kurumsal e-posta</footer>
+</div>
+
+<script>
+// Sayım tablosundaki sayılar sayfa açılırken bir kez sayarak yerine oturur.
+(function(){
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var cells = document.querySelectorAll('.count td[data-n]');
+  var fmt = new Intl.NumberFormat('tr-TR');
+  var dur = 1100, t0 = null;
+  function step(t){
+    if (!t0) t0 = t;
+    var p = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+    cells.forEach(function(c){ c.textContent = fmt.format(Math.round(+c.dataset.n * e)); });
+    if (p < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+})();
+</script>
+</body>
+</html>

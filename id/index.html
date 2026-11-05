@@ -48,6 +48,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-off
 .wrap{max-width:68rem;margin:0 auto;padding:0 1.25rem}
 .measure{max-width:38rem}
 
+*,*::before,*::after{box-sizing:border-box}
 /* header */
 .top{display:flex;justify-content:space-between;align-items:center;padding:1.25rem 0}
 .name{font-weight:800;letter-spacing:-.01em;text-decoration:none;color:var(--ink)}
@@ -76,7 +77,7 @@ h1{
 .report h2{font-size:1rem;margin:0 0 .25rem;font-weight:700;letter-spacing:0}
 .report p.cap{font-size:.9rem;color:var(--muted);margin:0 0 1rem}
 .scroll{overflow-x:auto}
-table.count{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:.98rem;min-width:24rem}
+table.count{width:100%;border-collapse:collapse;font-size:.98rem;min-width:24rem}
 .count th{font-size:.85rem;font-weight:500;color:var(--muted);text-align:right;padding:.4rem .5rem;border-bottom:1px solid var(--line)}
 .count th:first-child,.count td:first-child{text-align:left}
 .count td{padding:.6rem .5rem;text-align:right;border-bottom:1px solid var(--line)}
@@ -101,7 +102,7 @@ ol.steps p{font-size:.97rem;color:var(--muted);margin:0}
 
 .prices{display:grid;gap:2.5rem}
 @media (min-width:56rem){.prices{grid-template-columns:1.2fr 1fr;gap:4rem}}
-table.price{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+table.price{width:100%;border-collapse:collapse;}
 .price td{padding:.85rem 0;border-bottom:1px solid var(--line);vertical-align:top}
 .price td:last-child{text-align:right;font-weight:700;white-space:nowrap;padding-left:1rem}
 .price tr.main td{font-size:1.15rem}
@@ -109,7 +110,7 @@ table.price{width:100%;border-collapse:collapse;font-variant-numeric:tabular-num
 .fine{font-size:.92rem;color:var(--muted);margin-top:1rem}
 .example{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1.25rem 1.4rem}
 .example h3{margin:0 0 .75rem;font-size:1.05rem}
-.example p{margin:0 0 .5rem;font-variant-numeric:tabular-nums}
+.example p{margin:0 0 .5rem;}
 .example p:last-child{margin:0}
 
 .two{display:grid;gap:2rem}
@@ -156,23 +157,76 @@ button.btn[disabled]{opacity:.6;cursor:wait}
 .kvkk{font-size:.88rem;color:var(--muted);margin:0}
 .contact .alt{margin-top:2rem;color:var(--muted)}
 
-/* language switcher */
-.langs{display:flex;flex-wrap:wrap;gap:.15rem .6rem;font-size:.9rem;margin:0;padding:0;list-style:none}
-.langs a{color:var(--muted);text-decoration:none;padding:.15rem 0}
-.langs a:hover{color:var(--ink);text-decoration:underline}
-.langs a[aria-current="true"]{color:var(--ink);font-weight:700}
-.top{flex-wrap:wrap;gap:.75rem 1.5rem}
-.top-right{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1.25rem}
+/* header */
+.top{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1rem 0}
+.top-right{display:flex;align-items:center;gap:.6rem}
+.flag{width:1.35rem;height:.9rem;border-radius:2px;flex:none;box-shadow:0 0 0 1px rgba(0,0,0,.12)}
+
+/* language menu */
+.lang-menu{position:relative;border:0;padding:0}
+.lang-menu summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;
+  padding:.5rem .75rem;border:1px solid var(--line);border-radius:999px;background:var(--surface);
+  font-size:.95rem;font-weight:500;min-height:44px;user-select:none}
+.lang-menu summary::-webkit-details-marker{display:none}
+.lang-menu summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.lang-menu .chev{width:.65rem;height:.4rem;color:var(--muted);transition:transform .15s}
+.lang-menu[open] .chev{transform:rotate(180deg)}
+.lang-code{display:none}
+.lang-list{position:absolute;right:0;top:calc(100% + .4rem);z-index:20;margin:0;padding:.35rem;list-style:none;
+  min-width:13.5rem;background:var(--surface);border:1px solid var(--line);border-radius:12px;
+  box-shadow:0 10px 30px rgba(20,35,40,.14)}
+.lang-list a{display:flex;align-items:center;gap:.65rem;padding:.6rem .7rem;border-radius:8px;color:var(--ink);text-decoration:none;min-height:44px}
+.lang-list a:hover,.lang-list a:focus-visible{background:var(--bg);outline:none}
+.lang-list a[aria-current="true"]{font-weight:700}
+.lang-list a[aria-current="true"]::after{content:"✓";margin-left:auto;color:var(--ok)}
+
+/* whatsapp button */
+.wa-btn{display:inline-flex;align-items:center;gap:.45rem;padding:.5rem .9rem;min-height:44px;border-radius:999px;
+  background:var(--accent);color:var(--on-accent);text-decoration:none;font-weight:700;font-size:.95rem}
+.wa-btn svg{width:1.15rem;height:1.15rem;flex:none}
+.wa-btn:hover{filter:brightness(1.08)}
+
+/* layout fixes */
+figure.report{margin:0}
+.hero>*,.prices>*,.two>*,.case>*{min-width:0}
+.count td.note{font-variant-numeric:normal}
+.facts dd{overflow-wrap:anywhere}
+
+@media (max-width:40rem){
+  .wrap{padding:0 1rem}
+  .lang-cur,.wa-txt{display:none}
+  .lang-code{display:inline;font-weight:700;letter-spacing:.02em}
+  .wa-btn{padding:.5rem;width:44px;justify-content:center}
+  .lang-menu summary{padding:.5rem .65rem}
+  .hero{padding:1.5rem 0 3rem;gap:2rem}
+  h1{font-size:clamp(1.9rem,8.5vw,2.4rem)}
+  .lede{font-size:1.08rem}
+  .btn{display:block;text-align:center;width:100%}
+  .report{padding:1rem .85rem .5rem}
+  table.count{min-width:0;font-size:.88rem}
+  .count th,.count td{padding-left:.3rem;padding-right:.3rem}
+  .count th{font-size:.78rem}
+  .st{white-space:normal}
+  section.block{padding:2.5rem 0}
+  .facts dd{font-size:1.5rem}
+  .actions .btn{width:100%}
+  .price tr.main td{font-size:1.05rem}
+  .contact{padding:3rem 0 3.5rem}
+}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="f-tr" viewBox="0 0 30 20"><rect width="30" height="20" fill="#E30A17"/><circle cx="11.25" cy="10" r="5" fill="#fff"/><circle cx="12.5" cy="10" r="4" fill="#E30A17"/><polygon points="15.10,10.00 16.79,9.41 16.83,7.62 17.91,9.05 19.62,8.53 18.60,10.00 19.62,11.47 17.91,10.95 16.83,12.38 16.79,10.59" fill="#fff"/></symbol><symbol id="f-en" viewBox="0 0 30 20"><clipPath id="gbc"><rect width="30" height="20"/></clipPath><g clip-path="url(#gbc)"><rect width="30" height="20" fill="#012169"/><path d="M0,0 30,20M30,0 0,20" stroke="#fff" stroke-width="4"/><path d="M0,0 30,20M30,0 0,20" stroke="#C8102E" stroke-width="1.6"/><path d="M15,0V20M0,10H30" stroke="#fff" stroke-width="6"/><path d="M15,0V20M0,10H30" stroke="#C8102E" stroke-width="3.6"/></g></symbol><symbol id="f-id" viewBox="0 0 30 20"><rect width="30" height="20" fill="#fff"/><rect width="30" height="10" fill="#CE1126"/></symbol><symbol id="f-az" viewBox="0 0 30 20"><rect width="30" height="20" fill="#509E2F"/><rect width="30" height="13.33" fill="#EF3340"/><rect width="30" height="6.67" fill="#00B5E2"/><circle cx="14" cy="10" r="2.6" fill="#fff"/><circle cx="14.7" cy="10" r="2.1" fill="#EF3340"/><polygon points="17.30,8.70 17.53,9.45 18.22,9.08 17.85,9.77 18.60,10.00 17.85,10.23 18.22,10.92 17.53,10.55 17.30,11.30 17.07,10.55 16.38,10.92 16.75,10.23 16.00,10.00 16.75,9.77 16.38,9.08 17.07,9.45" fill="#fff"/></symbol><symbol id="f-de" viewBox="0 0 30 20"><rect width="30" height="20" fill="#FFCE00"/><rect width="30" height="13.33" fill="#DD0000"/><rect width="30" height="6.67" fill="#000"/></symbol><symbol id="f-fr" viewBox="0 0 30 20"><rect width="30" height="20" fill="#EF4135"/><rect width="20" height="20" fill="#fff"/><rect width="10" height="20" fill="#0055A4"/></symbol><symbol id="f-sv" viewBox="0 0 30 20"><rect width="30" height="20" fill="#006AA7"/><rect x="9" width="3.5" height="20" fill="#FECC00"/><rect y="8.25" width="30" height="3.5" fill="#FECC00"/></symbol><symbol id="f-ru" viewBox="0 0 30 20"><rect width="30" height="20" fill="#D52B1E"/><rect width="30" height="13.33" fill="#0039A6"/><rect width="30" height="6.67" fill="#fff"/></symbol></svg>
 
 <div class="wrap">
   <header class="top">
     <a class="name" href="/id/">Fatih Demirsoy</a>
     <div class="top-right">
-      <nav aria-label="Bahasa"><ul class="langs"><li><a href="/" hreflang="tr" lang="tr">Türkçe</a></li><li><a href="/en/" hreflang="en" lang="en">English</a></li><li><a href="/id/" hreflang="id" lang="id" aria-current="true">Bahasa Indonesia</a></li><li><a href="/az/" hreflang="az" lang="az">Azərbaycanca</a></li><li><a href="/de/" hreflang="de" lang="de">Deutsch</a></li><li><a href="/fr/" hreflang="fr" lang="fr">Français</a></li><li><a href="/sv/" hreflang="sv" lang="sv">Svenska</a></li><li><a href="/ru/" hreflang="ru" lang="ru">Русский</a></li></ul></nav>
-      <a class="small" href="https://wa.me/902622444189?text=Halo%2C%20saya%20ingin%20penawaran%20harga%20untuk%20migrasi%20ke%20Google%20Workspace.">Chat via WhatsApp</a>
+      <details class="lang-menu">
+        <summary aria-label="Bahasa: Bahasa Indonesia"><svg class="flag" aria-hidden="true"><use href="#f-id"/></svg><span class="lang-cur">Bahasa Indonesia</span><span class="lang-code" aria-hidden="true">ID</span><svg class="chev" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+        <ul class="lang-list"><li><a href="/" hreflang="tr" lang="tr"><svg class="flag" aria-hidden="true"><use href="#f-tr"/></svg><span>Türkçe</span></a></li><li><a href="/en/" hreflang="en" lang="en"><svg class="flag" aria-hidden="true"><use href="#f-en"/></svg><span>English</span></a></li><li><a href="/id/" hreflang="id" lang="id" aria-current="true"><svg class="flag" aria-hidden="true"><use href="#f-id"/></svg><span>Bahasa Indonesia</span></a></li><li><a href="/az/" hreflang="az" lang="az"><svg class="flag" aria-hidden="true"><use href="#f-az"/></svg><span>Azərbaycanca</span></a></li><li><a href="/de/" hreflang="de" lang="de"><svg class="flag" aria-hidden="true"><use href="#f-de"/></svg><span>Deutsch</span></a></li><li><a href="/fr/" hreflang="fr" lang="fr"><svg class="flag" aria-hidden="true"><use href="#f-fr"/></svg><span>Français</span></a></li><li><a href="/sv/" hreflang="sv" lang="sv"><svg class="flag" aria-hidden="true"><use href="#f-sv"/></svg><span>Svenska</span></a></li><li><a href="/ru/" hreflang="ru" lang="ru"><svg class="flag" aria-hidden="true"><use href="#f-ru"/></svg><span>Русский</span></a></li></ul>
+      </details>
+      <a class="wa-btn" href="https://wa.me/902622444189?text=Halo%2C%20saya%20ingin%20penawaran%20harga%20untuk%20migrasi%20ke%20Google%20Workspace." aria-label="Chat via WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.2 3.6c-.5.4-1.3.1-1.3-.6V16A2.5 2.5 0 0 1 4 13.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><span class="wa-txt">Chat via WhatsApp</span></a>
     </div>
   </header>
 
@@ -382,7 +436,12 @@ button.btn[disabled]{opacity:.6;cursor:wait}
 })();
 </script>
 <script>
-document.querySelectorAll('.langs a[hreflang]').forEach(function(a){
+(function(){
+  var m = document.querySelector('.lang-menu');
+  document.addEventListener('click', function(e){ if (m.open && !m.contains(e.target)) m.open = false; });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && m.open) { m.open = false; m.querySelector('summary').focus(); } });
+})();
+document.querySelectorAll('.lang-list a[hreflang]').forEach(function(a){
   a.addEventListener('click', function(){ try { localStorage.setItem('site-lang', a.getAttribute('hreflang')); } catch(e){} });
 });
 </script>

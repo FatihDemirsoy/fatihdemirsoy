@@ -7,7 +7,7 @@
 - Priced separately: Outlook setup, moving files to Drive, group and alias changes after the switch, training, monthly management.
 - Typical duration 1–3 days. The old system stays on until the migration is verified, so no email is lost.
 - The customer owns the main admin account and pays the Google Workspace licence directly to Google.
-- Payment in Türkiye: jobs up to 20 users are paid in full at the start by bank transfer; larger jobs 50% at the start and 50% when the bulk migration is done, before handover. International: the package price is paid in full at the start via Payoneer (card or bank transfer; not available to residents of Russia and Belarus). Full refund if the review shows a different scope.
+- Payment in Türkiye (bank transfer): either the full amount at the start with a 5% discount, or 50% at the start and 50% when the bulk migration is done, before handover. International: the package price is paid in full at the start via Payoneer (card or bank transfer; not available to residents of Russia and Belarus). Full refund if the review shows a different scope.
 - Languages: Turkish, English, Indonesian, Azerbaijani, Swedish, Russian.
 
 ## Prices

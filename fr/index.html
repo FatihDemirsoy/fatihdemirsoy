@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Migration de messagerie vers Google Workspace | Fatih Demirsoy</title>
+<meta name="description" content="Je migre la messagerie de votre entreprise depuis Yandex, cPanel, Microsoft 365 ou tout autre fournisseur vers Google Workspace. DNS, sécurité et comptage par boîte inclus, à prix fixe.">
+<link rel="canonical" href="https://fatihdemirsoy.com/fr/">
+<link rel="alternate" hreflang="tr" href="https://fatihdemirsoy.com/">
+<link rel="alternate" hreflang="en" href="https://fatihdemirsoy.com/en/">
+<link rel="alternate" hreflang="az" href="https://fatihdemirsoy.com/az/">
+<link rel="alternate" hreflang="de" href="https://fatihdemirsoy.com/de/">
+<link rel="alternate" hreflang="fr" href="https://fatihdemirsoy.com/fr/">
+<link rel="alternate" hreflang="sv" href="https://fatihdemirsoy.com/sv/">
+<link rel="alternate" hreflang="ru" href="https://fatihdemirsoy.com/ru/">
+<link rel="alternate" hreflang="x-default" href="https://fatihdemirsoy.com/en/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✉️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EDF1EF; --surface:#F8FAF9; --ink:#1B2A31; --muted:#56666D;
+  --line:#C9D3CF; --ok:#0E7A63; --diff:#A3245A; --accent:#1E4FBF; --on-accent:#FFFFFF;
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#121A1E; --surface:#1A252A; --ink:#E4ECE9; --muted:#9AAAA6;
+    --line:#2E3D43; --ok:#3FC7A4; --diff:#F07AAB; --accent:#7EA2FF; --on-accent:#0D1620;
+    color-scheme:dark;
+  }
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Schibsted Grotesk",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  font-size:1.0625rem;line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:68rem;margin:0 auto;padding:0 1.25rem}
+.measure{max-width:38rem}
+
+/* header */
+.top{display:flex;justify-content:space-between;align-items:center;padding:1.25rem 0}
+.name{font-weight:800;letter-spacing:-.01em;text-decoration:none;color:var(--ink)}
+.top a.small{font-size:.95rem}
+
+/* hero */
+.hero{display:grid;gap:2.5rem;padding:2.5rem 0 4rem;align-items:center}
+@media (min-width:60rem){.hero{grid-template-columns:1fr 1.05fr;gap:3.5rem;padding:4rem 0 5.5rem}}
+h1{
+  font-size:clamp(2.1rem,5.2vw,3.4rem);line-height:1.05;letter-spacing:-.025em;
+  font-weight:800;margin:0 0 1.25rem;
+}
+.lede{font-size:1.2rem;color:var(--muted);margin:0 0 2rem;max-width:32rem}
+.btn{
+  display:inline-block;background:var(--accent);color:var(--on-accent);
+  font-weight:700;text-decoration:none;padding:.9rem 1.4rem;border-radius:999px;
+}
+.btn:hover{filter:brightness(1.08)}
+.under{font-size:.95rem;color:var(--muted);margin-top:1rem}
+
+/* the count report: the memorable element */
+.report{
+  background:var(--surface);border:1px solid var(--line);border-radius:14px;
+  padding:1.25rem 1.25rem .75rem;
+}
+.report h2{font-size:1rem;margin:0 0 .25rem;font-weight:700;letter-spacing:0}
+.report p.cap{font-size:.9rem;color:var(--muted);margin:0 0 1rem}
+.scroll{overflow-x:auto}
+table.count{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:.98rem;min-width:24rem}
+.count th{font-size:.85rem;font-weight:500;color:var(--muted);text-align:right;padding:.4rem .5rem;border-bottom:1px solid var(--line)}
+.count th:first-child,.count td:first-child{text-align:left}
+.count td{padding:.6rem .5rem;text-align:right;border-bottom:1px solid var(--line)}
+.count tr:last-child td{border-bottom:0}
+.count td.who{font-weight:500}
+.st{font-weight:700;white-space:nowrap}
+.st.ok{color:var(--ok)}
+.st.diff{color:var(--diff)}
+.note{font-size:.85rem;color:var(--muted);text-align:left!important;padding-top:0!important;border-bottom:1px solid var(--line)}
+
+/* sections */
+section.block{padding:3.5rem 0;border-top:1px solid var(--line)}
+h2.sec{font-size:clamp(1.6rem,3.2vw,2.2rem);line-height:1.15;letter-spacing:-.02em;margin:0 0 1rem;font-weight:800}
+.block p{margin:0 0 1rem}
+
+ol.steps{list-style:none;padding:0;margin:2rem 0 0;display:grid;gap:1.75rem;counter-reset:s}
+@media (min-width:48rem){ol.steps{grid-template-columns:repeat(4,1fr)}}
+ol.steps li{counter-increment:s;border-top:3px solid var(--ink);padding-top:.9rem}
+ol.steps li::before{content:counter(s);display:block;font-weight:800;font-size:1.6rem;line-height:1;margin-bottom:.6rem}
+ol.steps h3{font-size:1.05rem;margin:0 0 .35rem}
+ol.steps p{font-size:.97rem;color:var(--muted);margin:0}
+
+.prices{display:grid;gap:2.5rem}
+@media (min-width:56rem){.prices{grid-template-columns:1.2fr 1fr;gap:4rem}}
+table.price{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.price td{padding:.85rem 0;border-bottom:1px solid var(--line);vertical-align:top}
+.price td:last-child{text-align:right;font-weight:700;white-space:nowrap;padding-left:1rem}
+.price tr.main td{font-size:1.15rem}
+.price small{display:block;color:var(--muted);font-weight:400;font-size:.9rem}
+.fine{font-size:.92rem;color:var(--muted);margin-top:1rem}
+.example{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1.25rem 1.4rem}
+.example h3{margin:0 0 .75rem;font-size:1.05rem}
+.example p{margin:0 0 .5rem;font-variant-numeric:tabular-nums}
+.example p:last-child{margin:0}
+
+.two{display:grid;gap:2rem}
+@media (min-width:48rem){.two{grid-template-columns:1fr 1fr;gap:3.5rem}}
+.two h3{font-size:1.1rem;margin:0 0 .75rem}
+ul.plain{margin:0;padding-left:1.1rem}
+ul.plain li{margin-bottom:.45rem}
+
+.case{display:grid;gap:2rem}
+@media (min-width:56rem){.case{grid-template-columns:.8fr 1.2fr;gap:4rem}}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:0}
+.facts div{border-left:3px solid var(--ok);padding-left:.75rem}
+.facts dt{font-size:.9rem;color:var(--muted)}
+.facts dd{margin:0;font-size:1.9rem;font-weight:800;line-height:1.1}
+
+details{border-bottom:1px solid var(--line);padding:1rem 0}
+details summary{cursor:pointer;font-weight:700;list-style-position:outside}
+details p{margin:.6rem 0 0;color:var(--muted)}
+
+.contact{padding:4rem 0 5rem;border-top:1px solid var(--line)}
+.contact .row{display:flex;flex-wrap:wrap;gap:1rem 1.5rem;align-items:center;margin-top:1.5rem}
+footer{font-size:.9rem;color:var(--muted);padding:1.5rem 0 2.5rem;border-top:1px solid var(--line)}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* form */
+form.quote{display:grid;gap:1rem;margin-top:1.75rem;max-width:40rem}
+@media (min-width:40rem){form.quote{grid-template-columns:1fr 1fr}.full{grid-column:1/-1}}
+.field label{display:block;font-weight:500;font-size:.95rem;margin-bottom:.35rem}
+.field .opt{color:var(--muted);font-weight:400}
+.field input,.field select,.field textarea{
+  width:100%;font:inherit;color:var(--ink);background:var(--surface);
+  border:1px solid var(--line);border-radius:10px;padding:.7rem .8rem;
+}
+.field textarea{min-height:6.5rem;resize:vertical}
+.field input:focus-visible,.field select:focus-visible,.field textarea:focus-visible{outline:3px solid var(--accent);outline-offset:1px}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.actions{display:flex;flex-wrap:wrap;gap:.75rem 1rem;align-items:center}
+button.btn{border:0;cursor:pointer;font:inherit;font-weight:700}
+button.btn[disabled]{opacity:.6;cursor:wait}
+.btn.ghost{background:transparent;color:var(--accent);border:2px solid var(--accent)}
+.status{min-height:1.5rem;font-weight:500;margin:0}
+.status.ok{color:var(--ok)}.status.err{color:var(--diff)}
+.kvkk{font-size:.88rem;color:var(--muted);margin:0}
+.contact .alt{margin-top:2rem;color:var(--muted)}
+
+/* language switcher */
+.langs{display:flex;flex-wrap:wrap;gap:.15rem .6rem;font-size:.9rem;margin:0;padding:0;list-style:none}
+.langs a{color:var(--muted);text-decoration:none;padding:.15rem 0}
+.langs a:hover{color:var(--ink);text-decoration:underline}
+.langs a[aria-current="true"]{color:var(--ink);font-weight:700}
+.top{flex-wrap:wrap;gap:.75rem 1.5rem}
+.top-right{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1.25rem}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <a class="name" href="/fr/">Fatih Demirsoy</a>
+    <div class="top-right">
+      <nav aria-label="Langue"><ul class="langs"><li><a href="/" hreflang="tr" lang="tr">Türkçe</a></li><li><a href="/en/" hreflang="en" lang="en">English</a></li><li><a href="/az/" hreflang="az" lang="az">Azərbaycanca</a></li><li><a href="/de/" hreflang="de" lang="de">Deutsch</a></li><li><a href="/fr/" hreflang="fr" lang="fr" aria-current="true">Français</a></li><li><a href="/sv/" hreflang="sv" lang="sv">Svenska</a></li><li><a href="/ru/" hreflang="ru" lang="ru">Русский</a></li></ul></nav>
+      <a class="small" href="https://wa.me/902622444189?text=Bonjour%2C%20je%20souhaite%20un%20devis%20pour%20une%20migration%20vers%20Google%20Workspace.">Écrire sur WhatsApp</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div>
+        <h1>Je migre la messagerie de votre entreprise vers Google Workspace. En comptant chaque boîte.</h1>
+        <p class="lede">Migration depuis Yandex, cPanel, Plesk, Microsoft 365 ou un autre fournisseur : DNS, utilisateurs, paramètres de sécurité et tous vos anciens e-mails. Prix fixe, sans interruption de votre messagerie.</p>
+        <a class="btn" href="#iletisim">Demander un devis</a>
+        <p class="under">Indiquez simplement votre nombre d’utilisateurs et votre fournisseur actuel.</p>
+      </div>
+
+      <figure class="report" aria-labelledby="rep-title">
+        <h2 id="rep-title">Le rapport de comptage remis à la livraison</h2>
+        <p class="cap">Exemple. Pour chaque boîte, je compare le nombre d’e-mails dans l’ancien système et dans Workspace.</p>
+        <div class="scroll">
+          <table class="count">
+            <thead><tr><th scope="col">Boîte</th><th scope="col">Ancien système</th><th scope="col">Workspace</th><th scope="col">État</th></tr></thead>
+            <tbody>
+              <tr><td class="who">ventes@</td><td data-n="12480">12 480</td><td data-n="12480">12 480</td><td class="st ok">Conforme</td></tr>
+              <tr><td class="who">info@</td><td data-n="8915">8 915</td><td data-n="8915">8 915</td><td class="st ok">Conforme</td></tr>
+              <tr><td class="who">compta@</td><td data-n="31207">31 207</td><td data-n="31189">31 189</td><td class="st diff">18 écarts</td></tr>
+              <tr><td colspan="4" class="note">Écart : 18 e-mails marqués comme infectés dans l’ancien système. Listés un par un dans le rapport.</td></tr>
+              <tr><td class="who">direction@</td><td data-n="9402">9 402</td><td data-n="9402">9 402</td><td class="st ok">Remigrée</td></tr>
+              <tr><td colspan="4" class="note">L’outil de migration indiquait « terminé », mais 4 400 e-mails manquaient. Le comptage l’a révélé.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+    </div>
+
+    <section class="block" id="surec">
+      <div class="measure">
+        <h2 class="sec">Comment se déroule la migration</h2>
+        <p>La plupart des missions prennent 1 à 3 jours. Votre ancien système reste actif jusqu’à la vérification de la migration.</p>
+      </div>
+      <ol class="steps">
+        <li><h3>Analyse</h3><p>Je recense les boîtes, les alias, le volume de messages et l’endroit où votre DNS est géré.</p></li>
+        <li><h3>Compte et DNS</h3><p>Validation du domaine, utilisateurs, MX, SPF, DKIM et DMARC. Paramètres de sécurité des administrateurs.</p></li>
+        <li><h3>Migration</h3><p>Les anciens e-mails sont transférés avec leurs dossiers. Une deuxième passe récupère ce qui arrive pendant la bascule.</p></li>
+        <li><h3>Comptage et livraison</h3><p>Un rapport de comptage par boîte, un guide Gmail d’une page pour vos utilisateurs et 7 jours d’assistance.</p></li>
+      </ol>
+    </section>
+
+    <section class="block" id="fiyat">
+      <div class="prices">
+        <div>
+          <h2 class="sec">Tarifs</h2>
+          <table class="price">
+            <tbody>
+              <tr class="main"><td>Configuration, DNS, sécurité et migration de 5 utilisateurs</td><td>80 $</td></tr>
+              <tr><td>Chaque utilisateur supplémentaire<small>Migration et contrôle du comptage inclus</small></td><td>7 $</td></tr>
+              <tr><td>Domaine supplémentaire<small>Un second domaine dans le même compte Workspace</small></td><td>20 $</td></tr>
+              <tr><td>Configuration d’Outlook<small>Par utilisateur qui le souhaite</small></td><td>5 $</td></tr>
+              <tr><td>Gestion et assistance mensuelles<small>Nouveaux utilisateurs, mots de passe, sécurité, dépannage</small></td><td>30 $ / mois</td></tr>
+            </tbody>
+          </table>
+          <p class="fine">Prix en dollars américains. Paiement par virement bancaire ou Payoneer. La licence Google Workspace est payée directement à Google.</p>
+        </div>
+        <div class="example">
+          <h3>Exemples de calcul</h3>
+          <p>10 utilisateurs: 80 $ + 5 × 7 $ = <strong>115 $</strong></p>
+          <p>20 utilisateurs: 80 $ + 15 × 7 $ = <strong>185 $</strong></p>
+          <p>20 utilisateurs, 2 domaines: <strong>205 $</strong></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="kapsam">
+      <div class="two">
+        <div>
+          <h3>Inclus</h3>
+          <ul class="plain"><li>Ouverture du compte Workspace et validation du domaine</li><li>Création des utilisateurs, règles de mot de passe, validation en deux étapes pour les administrateurs</li><li>Configuration et test de MX, SPF, DKIM et DMARC</li><li>Migration des anciens e-mails et synchronisation finale</li><li>Rapport de comptage par boîte</li><li>Guide Gmail web et mobile pour les utilisateurs</li><li>7 jours d’assistance après la bascule</li></ul>
+        </div>
+        <div>
+          <h3>Facturé à part</h3>
+          <ul class="plain"><li>Installations d’Outlook</li><li>Transfert des fichiers vers Drive</li><li>Modifications de groupes et d’alias demandées après la bascule</li><li>Formation des utilisateurs et gestion continue</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="referans">
+      <div class="case">
+        <div>
+          <h2 class="sec">Ma dernière migration</h2>
+          <dl class="facts">
+            <div><dt>Domaines</dt><dd>2</dd></div>
+            <div><dt>Boîtes</dt><dd>38</dd></div>
+            <div><dt>Source</dt><dd>Yandex</dd></div>
+          </dl>
+        </div>
+        <div class="measure">
+          <p>J’ai réuni deux domaines dans un seul compte Workspace. Les adresses fonctionnelles (info, ventes, support) ont gardé leurs propres boîtes, et les utilisateurs sont passés à Gmail sur le web et sur mobile.</p>
+          <p>L’outil de migration affichait une boîte comme « terminée », alors que 4 400 e-mails n’étaient pas arrivés. C’est pour cela que le comptage fait partie de l’offre : tout manque est repéré avant la livraison.</p>
+          <p>Les e-mails déjà illisibles dans l’ancien système, vides et sans contenu, ont été listés à part dans le rapport. La direction a vu clairement ce qui avait été migré et ce qui était abîmé dès le départ.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="sss">
+      <div class="measure">
+        <h2 class="sec">Questions fréquentes</h2>
+        <details><summary>Ne recevrons-nous plus d’e-mails pendant la migration ?</summary><p>Si. Tant que l’enregistrement MX n’est pas modifié, le courrier arrive dans l’ancien système, puis dans Workspace. Ce qui arrive entre les deux est récupéré par la synchronisation finale.</p></details>
+        <details><summary>Qui sera administrateur du compte ?</summary><p>Vous. Le compte administrateur principal est à vous dès le départ et je suis second administrateur. À la fin, vous pouvez retirer mon accès.</p></details>
+        <details><summary>Comment se passe le paiement ?</summary><p>La moitié au démarrage, le reste le jour du changement de MX. Par virement bancaire ou Payoneer, avec facture.</p></details>
+        <details><summary>Que deviennent les e-mails déjà abîmés dans l’ancien système ?</summary><p>Les e-mails qui ne s’ouvrent plus ou ont perdu leur contenu chez l’ancien fournisseur ne peuvent pas être migrés. Je les liste à part dans le rapport, pour que vous sachiez ce qui était abîmé dès le départ.</p></details>
+        <details><summary>Je suis dans un autre pays. Est-ce un problème ?</summary><p>Non. Tout se fait à distance. Votre part : me donner accès au panneau DNS et transmettre leurs nouveaux mots de passe aux utilisateurs.</p></details>
+      </div>
+    </section>
+
+    <section class="contact" id="iletisim">
+      <div class="measure">
+        <h2 class="sec">Demander un devis</h2>
+        <p>Remplissez le formulaire, je réponds avec un prix le jour même. Vous pouvez aussi envoyer ces informations sur WhatsApp en un geste.</p>
+      </div>
+      <form class="quote" id="quote" novalidate>
+        <div class="field"><label for="f-ad">Nom et prénom</label><input id="f-ad" data-k="name" autocomplete="name" required></div>
+        <div class="field"><label for="f-firma">Entreprise <span class="opt">(facultatif)</span></label><input id="f-firma" data-k="company" autocomplete="organization"></div>
+        <div class="field"><label for="f-tel">Téléphone</label><input id="f-tel" data-k="phone" type="tel" autocomplete="tel" inputmode="tel"></div>
+        <div class="field"><label for="f-mail">E-mail</label><input id="f-mail" data-k="email" type="email" autocomplete="email"></div>
+        <div class="field"><label for="f-kul">Nombre d’utilisateurs</label><input id="f-kul" data-k="users" type="number" min="1" inputmode="numeric" required></div>
+        <div class="field"><label for="f-dom">Nombre de domaines</label><input id="f-dom" data-k="domains" type="number" min="1" value="1" inputmode="numeric"></div>
+        <div class="field full"><label for="f-kay">Quel service de messagerie utilisez-vous aujourd’hui ?</label>
+          <select id="f-kay" data-k="source"><option>Yandex</option><option>Messagerie de l’hébergeur (cPanel, Plesk)</option><option>Microsoft 365 / Outlook</option><option>Un autre compte Google Workspace</option><option>Autre / je ne sais pas</option></select></div>
+        <div class="field full"><label for="f-not">Autres précisions <span class="opt">(facultatif)</span></label><textarea id="f-not" data-k="note"></textarea></div>
+        <div class="hp" aria-hidden="true"><label for="f-hp">Laissez ce champ vide</label><input id="f-hp" name="_honey" tabindex="-1" autocomplete="off"></div>
+        <p class="kvkk full">Vos informations servent uniquement à préparer votre devis et ne sont jamais partagées.</p>
+        <div class="actions full">
+          <button class="btn" type="submit" id="send-mail">Envoyer la demande</button>
+          <button class="btn ghost" type="button" id="send-wa">Envoyer sur WhatsApp</button>
+        </div>
+        <p class="status full" id="status" role="status" aria-live="polite"></p>
+      </form>
+      <p class="alt">Vous préférez écrire directement ? <a href="mailto:bilgi@fatihdemirsoy.com">bilgi@fatihdemirsoy.com</a></p>
+    </section>
+  </main>
+
+  <footer>Fatih Demirsoy, réseau, systèmes et messagerie d’entreprise. Mes autres liens : <a href="https://linktr.ee/FatihDemirsoy">linktr.ee/FatihDemirsoy</a></footer>
+</div>
+
+<script>
+(function(){
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var cells = document.querySelectorAll('.count td[data-n]');
+  var fmt = new Intl.NumberFormat('fr-FR');
+  var dur = 1100, t0 = null;
+  function step(t){
+    if (!t0) t0 = t;
+    var p = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+    cells.forEach(function(c){ c.textContent = fmt.format(Math.round(+c.dataset.n * e)); });
+    if (p < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+})();
+</script>
+<script>
+(function(){
+  var T = {"e_name": "Indiquez votre nom.", "e_contact": "Indiquez un téléphone ou un e-mail pour que je puisse vous répondre.", "e_email": "Vérifiez l’adresse e-mail.", "e_users": "Indiquez le nombre d’utilisateurs, une estimation suffit.", "sending": "Envoi en cours…", "ok": "Votre demande est bien arrivée. Je réponds aujourd’hui.", "fail": "Échec de l’envoi. Utilisez « Envoyer sur WhatsApp » ou écrivez à bilgi@fatihdemirsoy.com.", "wa_intro": "Bonjour, je souhaite un devis pour une migration vers Google Workspace.", "code": "FR", "labels": {"name": "Nom et prénom", "company": "Entreprise", "phone": "Téléphone", "email": "E-mail", "users": "Nombre d’utilisateurs", "domains": "Nombre de domaines", "source": "Quel service de messagerie utilisez-vous aujourd’hui", "note": "Autres précisions"}};
+  var MAIL = "bilgi@fatihdemirsoy.com", WA = "902622444189";
+  var form = document.getElementById("quote"), st = document.getElementById("status");
+  var btn = document.getElementById("send-mail");
+  function data(){
+    var d = {};
+    form.querySelectorAll("[data-k]").forEach(function(el){ d[el.dataset.k] = el.value.trim(); });
+    return d;
+  }
+  function labeled(d){
+    var o = {};
+    Object.keys(d).forEach(function(k){ if (d[k]) o[T.labels[k]] = d[k]; });
+    return o;
+  }
+  function check(d){
+    if (!d.name) return T.e_name;
+    if (!d.phone && !d.email) return T.e_contact;
+    if (d.email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(d.email)) return T.e_email;
+    if (!d.users) return T.e_users;
+    return "";
+  }
+  function say(msg, cls){ st.textContent = msg; st.className = "status full " + (cls || ""); }
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    if (form.elements["_honey"].value) return;
+    var d = data(), err = check(d);
+    if (err) { say(err, "err"); return; }
+    btn.disabled = true; say(T.sending);
+    var body = Object.assign({ "Dil / Language": T.code }, labeled(d), {
+      _subject: "[" + T.code + "] Workspace teklif: " + (d.company || d.name) + ", " + d.users + " kullanıcı",
+      _template: "table", _captcha: "false"
+    });
+    if (d.email) body._replyto = d.email;
+    fetch("https://formsubmit.co/ajax/" + MAIL, {
+      method: "POST", headers: {"Content-Type":"application/json","Accept":"application/json"}, body: JSON.stringify(body)
+    }).then(function(r){ return r.json(); }).then(function(j){
+      if (j && (j.success === true || j.success === "true")) { form.reset(); say(T.ok, "ok"); }
+      else throw new Error();
+    }).catch(function(){ say(T.fail, "err"); })
+      .finally(function(){ btn.disabled = false; });
+  });
+  document.getElementById("send-wa").addEventListener("click", function(){
+    var d = data(), err = check(d);
+    if (err) { say(err, "err"); return; }
+    var lines = [T.wa_intro, ""], l = labeled(d);
+    Object.keys(l).forEach(function(k){ lines.push(k + ": " + l[k]); });
+    say("");
+    window.open("https://wa.me/" + WA + "?text=" + encodeURIComponent(lines.join("\n")), "_blank", "noopener");
+  });
+})();
+</script>
+</body>
+</html>

@@ -4,6 +4,40 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Google Workspace’e mail taşıma | Fatih Demirsoy</title>
+<script>
+(function(){
+  var PATHS = {tr:'/', en:'/en/', id:'/id/', az:'/az/', de:'/de/', fr:'/fr/', sv:'/sv/', ru:'/ru/'};
+  if (/bot|crawl|spider|slurp|lighthouse|preview|facebookexternalhit/i.test(navigator.userAgent)) return;
+  var lang = null;
+  try { lang = localStorage.getItem('site-lang'); } catch(e){}
+  if (!PATHS[lang]) {
+    lang = null;
+    var tz = ''; try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch(e){}
+    var TZ = {
+      'Europe/Istanbul':'tr', 'Asia/Istanbul':'tr',
+      'Asia/Baku':'az',
+      'Europe/Berlin':'de', 'Europe/Vienna':'de', 'Europe/Busingen':'de', 'Europe/Vaduz':'de',
+      'Europe/Paris':'fr', 'Europe/Monaco':'fr',
+      'Europe/Stockholm':'sv',
+      'Asia/Jakarta':'id', 'Asia/Pontianak':'id', 'Asia/Makassar':'id', 'Asia/Jayapura':'id',
+      'Asia/Almaty':'ru', 'Asia/Qyzylorda':'ru', 'Asia/Qostanay':'ru', 'Asia/Aqtobe':'ru', 'Asia/Aqtau':'ru', 'Asia/Atyrau':'ru', 'Asia/Oral':'ru',
+      'Asia/Tashkent':'ru', 'Asia/Samarkand':'ru', 'Asia/Bishkek':'ru', 'Asia/Dushanbe':'ru', 'Asia/Ashgabat':'ru', 'Asia/Yerevan':'ru',
+      'Europe/Moscow':'ru', 'Europe/Minsk':'ru'
+    };
+    lang = TZ[tz] || null;
+    if (!lang) {
+      var ls = navigator.languages || [navigator.language || ''];
+      for (var i = 0; i < ls.length && !lang; i++) {
+        var c = String(ls[i]).toLowerCase().split('-')[0];
+        if (c === 'in') c = 'id';
+        if (PATHS[c]) lang = c;
+      }
+    }
+    if (!lang) lang = 'en';
+  }
+  if (lang !== 'tr') location.replace(PATHS[lang] + location.search + location.hash);
+})();
+</script>
 <meta name="description" content="Şirket e-postanızı Yandex, cPanel veya diğer sağlayıcılardan Google Workspace’e taşıyorum. DNS, güvenlik ayarları ve kutu kutu mail sayımı dahil, sabit fiyat.">
 <link rel="canonical" href="https://fatihdemirsoy.com/">
 <link rel="alternate" hreflang="tr" href="https://fatihdemirsoy.com/">
@@ -380,6 +414,11 @@ button.btn[disabled]{opacity:.6;cursor:wait}
     window.open("https://wa.me/" + WA + "?text=" + encodeURIComponent(lines.join("\n")), "_blank", "noopener");
   });
 })();
+</script>
+<script>
+document.querySelectorAll('.langs a[hreflang]').forEach(function(a){
+  a.addEventListener('click', function(){ try { localStorage.setItem('site-lang', a.getAttribute('hreflang')); } catch(e){} });
+});
 </script>
 </body>
 </html>

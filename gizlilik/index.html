@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="tr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gizlilik | Fatih Demirsoy</title>
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://fatihdemirsoy.com/gizlilik/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✉️</text></svg>">
+<style>@font-face{font-family:"Schibsted Grotesk";src:url("/fonts/schibsted-grotesk.woff2") format("woff2");font-weight:400 800;font-style:normal;font-display:swap}
+
+:root{
+  --bg:#EDF1EF; --surface:#F8FAF9; --ink:#1B2A31; --muted:#56666D;
+  --line:#C9D3CF; --ok:#0E7A63; --diff:#A3245A; --accent:#1E4FBF; --on-accent:#FFFFFF;
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#121A1E; --surface:#1A252A; --ink:#E4ECE9; --muted:#9AAAA6;
+    --line:#2E3D43; --ok:#3FC7A4; --diff:#F07AAB; --accent:#7EA2FF; --on-accent:#0D1620;
+    color-scheme:dark;
+  }
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Schibsted Grotesk",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  font-size:1.0625rem;line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:68rem;margin:0 auto;padding:0 1.25rem}
+.measure{max-width:38rem}
+
+/* header */
+.top{display:flex;justify-content:space-between;align-items:center;padding:1.25rem 0}
+.name{font-weight:800;letter-spacing:-.01em;text-decoration:none;color:var(--ink)}
+.top a.small{font-size:.95rem}
+
+/* hero */
+.hero{display:grid;gap:2.5rem;padding:2.5rem 0 4rem;align-items:center}
+@media (min-width:60rem){.hero{grid-template-columns:1fr 1.05fr;gap:3.5rem;padding:4rem 0 5.5rem}}
+h1{
+  font-size:clamp(2.1rem,5.2vw,3.4rem);line-height:1.05;letter-spacing:-.025em;
+  font-weight:800;margin:0 0 1.25rem;
+}
+.lede{font-size:1.2rem;color:var(--muted);margin:0 0 2rem;max-width:32rem}
+.btn{
+  display:inline-block;background:var(--accent);color:var(--on-accent);
+  font-weight:700;text-decoration:none;padding:.9rem 1.4rem;border-radius:999px;
+}
+.btn:hover{filter:brightness(1.08)}
+.under{font-size:.95rem;color:var(--muted);margin-top:1rem}
+
+/* the count report: the memorable element */
+.report{
+  background:var(--surface);border:1px solid var(--line);border-radius:14px;
+  padding:1.25rem 1.25rem .75rem;
+}
+.report h2{font-size:1rem;margin:0 0 .25rem;font-weight:700;letter-spacing:0}
+.report p.cap{font-size:.9rem;color:var(--muted);margin:0 0 1rem}
+.scroll{overflow-x:auto}
+table.count{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:.98rem;min-width:24rem}
+.count th{font-size:.85rem;font-weight:500;color:var(--muted);text-align:right;padding:.4rem .5rem;border-bottom:1px solid var(--line)}
+.count th:first-child,.count td:first-child{text-align:left}
+.count td{padding:.6rem .5rem;text-align:right;border-bottom:1px solid var(--line)}
+.count tr:last-child td{border-bottom:0}
+.count td.who{font-weight:500}
+.st{font-weight:700;white-space:nowrap}
+.st.ok{color:var(--ok)}
+.st.diff{color:var(--diff)}
+.note{font-size:.85rem;color:var(--muted);text-align:left!important;padding-top:0!important;border-bottom:1px solid var(--line)}
+
+/* sections */
+section.block{padding:3.5rem 0;border-top:1px solid var(--line)}
+h2.sec{font-size:clamp(1.6rem,3.2vw,2.2rem);line-height:1.15;letter-spacing:-.02em;margin:0 0 1rem;font-weight:800}
+.block p{margin:0 0 1rem}
+
+ol.steps{list-style:none;padding:0;margin:2rem 0 0;display:grid;gap:1.75rem;counter-reset:s}
+@media (min-width:48rem){ol.steps{grid-template-columns:repeat(4,1fr)}}
+ol.steps li{counter-increment:s;border-top:3px solid var(--ink);padding-top:.9rem}
+ol.steps li::before{content:counter(s);display:block;font-weight:800;font-size:1.6rem;line-height:1;margin-bottom:.6rem}
+ol.steps h3{font-size:1.05rem;margin:0 0 .35rem}
+ol.steps p{font-size:.97rem;color:var(--muted);margin:0}
+
+.prices{display:grid;gap:2.5rem}
+@media (min-width:56rem){.prices{grid-template-columns:1.2fr 1fr;gap:4rem}}
+table.price{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.price td{padding:.85rem 0;border-bottom:1px solid var(--line);vertical-align:top}
+.price td:last-child{text-align:right;font-weight:700;white-space:nowrap;padding-left:1rem}
+.price tr.main td{font-size:1.15rem}
+.price small{display:block;color:var(--muted);font-weight:400;font-size:.9rem}
+.fine{font-size:.92rem;color:var(--muted);margin-top:1rem}
+.example{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1.25rem 1.4rem}
+.example h3{margin:0 0 .75rem;font-size:1.05rem}
+.example p{margin:0 0 .5rem;font-variant-numeric:tabular-nums}
+.example p:last-child{margin:0}
+
+.two{display:grid;gap:2rem}
+@media (min-width:48rem){.two{grid-template-columns:1fr 1fr;gap:3.5rem}}
+.two h3{font-size:1.1rem;margin:0 0 .75rem}
+ul.plain{margin:0;padding-left:1.1rem}
+ul.plain li{margin-bottom:.45rem}
+
+.case{display:grid;gap:2rem}
+@media (min-width:56rem){.case{grid-template-columns:.8fr 1.2fr;gap:4rem}}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:0}
+.facts div{border-left:3px solid var(--ok);padding-left:.75rem}
+.facts dt{font-size:.9rem;color:var(--muted)}
+.facts dd{margin:0;font-size:1.9rem;font-weight:800;line-height:1.1}
+
+details{border-bottom:1px solid var(--line);padding:1rem 0}
+details summary{cursor:pointer;font-weight:700;list-style-position:outside}
+details p{margin:.6rem 0 0;color:var(--muted)}
+
+.contact{padding:4rem 0 5rem;border-top:1px solid var(--line)}
+.contact .row{display:flex;flex-wrap:wrap;gap:1rem 1.5rem;align-items:center;margin-top:1.5rem}
+footer{font-size:.9rem;color:var(--muted);padding:1.5rem 0 2.5rem;border-top:1px solid var(--line)}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* form */
+form.quote{display:grid;gap:1rem;margin-top:1.75rem;max-width:40rem}
+@media (min-width:40rem){form.quote{grid-template-columns:1fr 1fr}.full{grid-column:1/-1}}
+.field label{display:block;font-weight:500;font-size:.95rem;margin-bottom:.35rem}
+.field .opt{color:var(--muted);font-weight:400}
+.field input,.field select,.field textarea{
+  width:100%;font:inherit;color:var(--ink);background:var(--surface);
+  border:1px solid var(--line);border-radius:10px;padding:.7rem .8rem;
+}
+.field textarea{min-height:6.5rem;resize:vertical}
+.field input:focus-visible,.field select:focus-visible,.field textarea:focus-visible{outline:3px solid var(--accent);outline-offset:1px}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.actions{display:flex;flex-wrap:wrap;gap:.75rem 1rem;align-items:center}
+button.btn{border:0;cursor:pointer;font:inherit;font-weight:700}
+button.btn[disabled]{opacity:.6;cursor:wait}
+.btn.ghost{background:transparent;color:var(--accent);border:2px solid var(--accent)}
+.status{min-height:1.5rem;font-weight:500;margin:0}
+.status.ok{color:var(--ok)}.status.err{color:var(--diff)}
+.kvkk{font-size:.88rem;color:var(--muted);margin:0}
+.contact .alt{margin-top:2rem;color:var(--muted)}
+
+/* language switcher */
+.langs{display:flex;flex-wrap:wrap;gap:.15rem .6rem;font-size:.9rem;margin:0;padding:0;list-style:none}
+.langs a{color:var(--muted);text-decoration:none;padding:.15rem 0}
+.langs a:hover{color:var(--ink);text-decoration:underline}
+.langs a[aria-current="true"]{color:var(--ink);font-weight:700}
+.top{flex-wrap:wrap;gap:.75rem 1.5rem}
+.top-right{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1.25rem}
+
+.legal{max-width:44rem;padding:2rem 0 4rem}
+.legal h1{font-size:clamp(1.9rem,4vw,2.6rem);margin-bottom:.5rem}
+.legal h2{font-size:1.2rem;margin:2.2rem 0 .6rem}
+.legal p,.legal li{color:var(--ink)}
+.legal .stand{color:var(--muted);margin-bottom:2rem}
+.legal ul{padding-left:1.2rem}
+</style></head>
+<body><div class="wrap">
+<header class="top"><a class="name" href="/">Fatih Demirsoy</a><a class="small" href="/">Ana sayfaya dön</a></header>
+<main class="legal"><h1>Gizlilik ve kişisel verilerin korunması</h1>
+<p class="stand">Son güncelleme: Kasım 2026</p>
+
+<h2>1. Veri sorumlusu</h2>
+<p>Fatih Demirsoy<br>E-posta: <a href="mailto:bilgi@fatihdemirsoy.com">bilgi@fatihdemirsoy.com</a></p>
+
+<h2>2. Kısaca</h2>
+<p>Bu site çerez, analiz veya takip aracı ve reklam hizmeti kullanmaz. Yazı tipleri üçüncü taraf sunuculardan değil, sitenin kendisinden yüklenir. Kişisel verileri yalnızca sitenin çalışması ve talebinizin yanıtlanması için gerektiği ölçüde işlerim.</p>
+
+<h2>3. Barındırma ve sunucu kayıtları</h2>
+<p>Site GitHub Pages üzerinden yayınlanır (GitHub, Inc., ABD). Sayfaları açtığınızda GitHub, siteyi size ulaştırmak ve güvenliğini sağlamak için IP adresi, tarih ve saat, açılan sayfa ve tarayıcı bilgisi gibi teknik verileri işler. Bu işlem, veri sorumlusunun meşru menfaatine dayanır (KVKK m. 5/2-f).</p>
+
+<h2>4. Teklif formu</h2>
+<p>Formu gönderdiğinizde girdiğiniz bilgileri işlerim: ad soyad, e-posta, kullanıcı ve alan adı sayısı, mevcut e-posta hizmetiniz ve isteğe bağlı olarak firma, telefon ve notunuz. Bilgiler Google Apps Script aracılığıyla Google Workspace’teki e-posta kutuma iletilir. Amaç, talebinizi yanıtlamak ve teklif hazırlamaktır. Hukuki sebep, bir sözleşmenin kurulmasıyla doğrudan ilgili olmasıdır (KVKK m. 5/2-c). Talep sonuçlandığında veriler silinir. İş başlarsa, ticari kayıtlar için yasal saklama süreleri geçerlidir.</p>
+
+<h2>5. Yurt dışına aktarım</h2>
+<p>Barındırma (GitHub) ve e-posta (Google) hizmet sağlayıcılarının sunucuları yurt dışında bulunduğundan, yukarıdaki veriler bu sağlayıcılara yurt dışında aktarılır. Aktarım, hizmetin sunulması için gereklidir ve KVKK m. 9’da öngörülen şartlar çerçevesinde yapılır.</p>
+
+<h2>6. E-posta ve WhatsApp</h2>
+<p>Bana e-posta yazarsanız bilgilerinizi yalnızca yanıt vermek için kullanırım. WhatsApp düğmeleri, hazır bir mesajla WhatsApp’ı açar. Mesajı WhatsApp’ta kendiniz gönderene kadar hiçbir veri iletilmez. WhatsApp’ın işlediği veriler için WhatsApp’ın gizlilik politikası geçerlidir.</p>
+
+<h2>7. Tarayıcıda saklanan bilgi</h2>
+<p>Bir dil seçtiğinizde site bu tercihi tarayıcınızın yerel belleğinde (localStorage, “site-lang”) saklar, böylece bir sonraki ziyaretinizde aynı dilde açılır. Bu bilgi cihazınızdan çıkmaz ve tarayıcı ayarlarından istediğiniz zaman silinebilir.</p>
+
+<h2>8. Haklarınız</h2>
+<p>KVKK m. 11 uyarınca verilerinizin işlenip işlenmediğini öğrenme, bilgi talep etme, düzeltilmesini veya silinmesini isteme, işlemeye itiraz etme ve zararın giderilmesini talep etme haklarına sahipsiniz. Başvurularınızı <a href="mailto:bilgi@fatihdemirsoy.com">bilgi@fatihdemirsoy.com</a> adresine iletebilirsiniz.</p></main>
+<footer>Fatih Demirsoy, contact@fatihdemirsoy.com</footer>
+</div></body></html>

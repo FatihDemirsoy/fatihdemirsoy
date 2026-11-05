@@ -3,9 +3,9 @@
 > Fatih Demirsoy is a network and systems administrator who migrates company email to Google Workspace from Yandex 360, cPanel/Plesk hosting mail, Microsoft 365 and other IMAP providers. Fixed prices, fully remote, with a per-mailbox email count report at handover that shows nothing went missing.
 
 ## Service
-- Included: Workspace account setup and domain verification; user creation; admin security (2-step verification, password policy); MX, SPF, DKIM and DMARC setup and testing; migration of all old email with folders plus a final sync; a per-mailbox count report comparing the old system with Workspace; a one-page Gmail guide for users; 7 days of support.
+- Included: Workspace account setup and domain verification; user creation; admin security (2-step verification, password policy); MX, SPF, DKIM and DMARC setup and testing; migration of all old email with folders plus a final sync; a per-mailbox count report comparing the old system with Workspace; 7 days of support.
 - Priced separately: Outlook setup, moving files to Drive, group and alias changes after the switch, training, monthly management.
-- Typical duration 1–3 days. The old system stays on until the migration is verified, so mail flow is not interrupted.
+- Typical duration 1–3 days. The old system stays on until the migration is verified, so no email is lost.
 - The customer owns the main admin account and pays the Google Workspace licence directly to Google.
 - Payment: half at the start, half on the day the MX record is switched. International customers: bank transfer or Payoneer (Payoneer is not available to residents of Russia and Belarus).
 - Languages: Turkish, English, Indonesian, Azerbaijani, German, French, Swedish, Russian.

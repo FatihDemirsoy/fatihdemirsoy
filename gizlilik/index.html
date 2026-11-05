@@ -219,6 +219,13 @@ figure.report{margin:0}
 .paybox .btn{margin:1rem 0 .5rem}
 @media (max-width:40rem){.paybox .bank dt{min-width:0;width:100%}}
 
+.payopts{border:0;margin:0 0 .85rem;padding:0;display:grid;gap:.5rem}
+.payopts label{display:flex;gap:.6rem;align-items:flex-start;padding:.65rem .75rem;border:1px solid var(--line);border-radius:10px;cursor:pointer;background:var(--bg)}
+.payopts input{margin-top:.25rem;accent-color:var(--accent);width:1.05rem;height:1.05rem;flex:none}
+.payopts label:has(input:checked){border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.payopts b{display:block}
+.payopts span{color:var(--muted);font-size:.92rem}
+
 .legal{max-width:44rem;padding:2rem 0 4rem}
 .legal h1{font-size:clamp(1.55rem,6.5vw,2.6rem);margin-bottom:.5rem;hyphens:auto;-webkit-hyphens:auto}
 .nw{white-space:nowrap}
@@ -236,16 +243,19 @@ figure.report{margin:0}
 <p>Fatih Demirsoy<br>E-posta: <a href="mailto:bilgi@fatihdemirsoy.com">bilgi@fatihdemirsoy.com</a></p>
 
 <h2>2. Kısaca</h2>
-<p>Bu site çerez, analiz veya takip aracı ve reklam hizmeti kullanmaz. Yazı tipleri üçüncü taraf sunuculardan değil, sitenin kendisinden yüklenir. Kişisel verileri yalnızca sitenin çalışması ve talebinizin yanıtlanması için gerektiği ölçüde işlerim.</p>
+<p>Bu site çerez, takip aracı ve reklam hizmeti kullanmaz. Ziyaretçi sayıları çerezsiz olarak ölçülür (bkz. madde 3a). Yazı tipleri üçüncü taraf sunuculardan değil, sitenin kendisinden yüklenir. Kişisel verileri yalnızca sitenin çalışması ve talebinizin yanıtlanması için gerektiği ölçüde işlerim.</p>
 
-<h2>3. Barındırma ve sunucu kayıtları</h2>
-<p>Site GitHub Pages üzerinden yayınlanır (GitHub, Inc., ABD). Sayfaları açtığınızda GitHub, siteyi size ulaştırmak ve güvenliğini sağlamak için IP adresi, tarih ve saat, açılan sayfa ve tarayıcı bilgisi gibi teknik verileri işler. Bu işlem, veri sorumlusunun meşru menfaatine dayanır (KVKK m. 5/2-f).</p>
+<h2>3. Barındırma, sunum ve sunucu kayıtları</h2>
+<p>Sitenin dosyaları GitHub’da (GitHub, Inc., ABD) saklanır ve ziyaretçilere Cloudflare’in ağı (Cloudflare, Inc., ABD) üzerinden sunulur. Sayfaları açtığınızda Cloudflare ve GitHub, siteyi size ulaştırmak ve saldırılara karşı korumak için IP adresi, tarih ve saat, açılan sayfa ve tarayıcı bilgisi gibi teknik verileri işler. Bu işlem, veri sorumlusunun meşru menfaatine dayanır (KVKK m. 5/2-f).</p>
+
+<h2>3a. Ziyaretçi istatistikleri</h2>
+<p>Siteyi kaç kişinin ziyaret ettiğini ve hangi sayfaların okunduğunu görmek için Cloudflare Web Analytics kullanıyorum. Bu araç çerez veya tarayıcı belleği kullanmaz, kullanıcı profili oluşturmaz ve sizi başka sitelerde takip etmez. Sayfa görüntüleme, gelinen site, ülke ve cihaz türü gibi toplu veriler kaydedilir. Bu işlem de meşru menfaate dayanır (KVKK m. 5/2-f).</p>
 
 <h2>4. Teklif formu</h2>
 <p>Formu gönderdiğinizde girdiğiniz bilgileri işlerim: ad soyad, e-posta, kullanıcı ve alan adı sayısı, mevcut e-posta hizmetiniz ve isteğe bağlı olarak firma, telefon ve notunuz. Bilgiler Google Apps Script aracılığıyla Google Workspace’teki e-posta kutuma iletilir. Amaç, talebinizi yanıtlamak ve teklif hazırlamaktır. Hukuki sebep, bir sözleşmenin kurulmasıyla doğrudan ilgili olmasıdır (KVKK m. 5/2-c). Talep sonuçlandığında veriler silinir. İş başlarsa, ticari kayıtlar için yasal saklama süreleri geçerlidir.</p>
 
 <h2>5. Yurt dışına aktarım</h2>
-<p>Barındırma (GitHub) ve e-posta (Google) hizmet sağlayıcılarının sunucuları yurt dışında bulunduğundan, yukarıdaki veriler bu sağlayıcılara yurt dışında aktarılır. Aktarım, hizmetin sunulması için gereklidir ve KVKK m. 9’da öngörülen şartlar çerçevesinde yapılır.</p>
+<p>Barındırma (GitHub, Cloudflare) ve e-posta (Google) hizmet sağlayıcılarının sunucuları yurt dışında bulunduğundan, yukarıdaki veriler bu sağlayıcılara yurt dışında aktarılır. Aktarım, hizmetin sunulması için gereklidir ve KVKK m. 9’da öngörülen şartlar çerçevesinde yapılır.</p>
 
 <h2>6. E-posta ve WhatsApp</h2>
 <p>Bana e-posta yazarsanız bilgilerinizi yalnızca yanıt vermek için kullanırım. WhatsApp düğmeleri, hazır bir mesajla WhatsApp’ı açar. Mesajı WhatsApp’ta kendiniz gönderene kadar hiçbir veri iletilmez. WhatsApp’ın işlediği veriler için WhatsApp’ın gizlilik politikası geçerlidir.</p>

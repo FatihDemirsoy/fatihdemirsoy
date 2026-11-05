@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>E-postflytt till Google Workspace | Fatih Demirsoy</title>
+
 <meta name="description" content="Jag flyttar företagets e-post från Yandex, cPanel, Microsoft 365 eller annan leverantör till Google Workspace. DNS, säkerhetsinställningar och räkning per brevlåda ingår, till fast pris.">
 <link rel="canonical" href="https://fatihdemirsoy.com/sv/">
 <link rel="alternate" hreflang="tr" href="https://fatihdemirsoy.com/">
@@ -380,6 +381,11 @@ button.btn[disabled]{opacity:.6;cursor:wait}
     window.open("https://wa.me/" + WA + "?text=" + encodeURIComponent(lines.join("\n")), "_blank", "noopener");
   });
 })();
+</script>
+<script>
+document.querySelectorAll('.langs a[hreflang]').forEach(function(a){
+  a.addEventListener('click', function(){ try { localStorage.setItem('site-lang', a.getAttribute('hreflang')); } catch(e){} });
+});
 </script>
 </body>
 </html>

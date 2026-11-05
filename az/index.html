@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Google Workspace-ə e-poçt köçürülməsi | Fatih Demirsoy</title>
+<meta name="description" content="Şirkət e-poçtunuzu Yandex, cPanel, Microsoft 365 və ya digər provayderlərdən Google Workspace-ə köçürürəm. DNS, təhlükəsizlik ayarları və hər qutu üzrə məktub sayı daxil olmaqla, sabit qiymətlə.">
+<link rel="canonical" href="https://fatihdemirsoy.com/az/">
+<link rel="alternate" hreflang="tr" href="https://fatihdemirsoy.com/">
+<link rel="alternate" hreflang="en" href="https://fatihdemirsoy.com/en/">
+<link rel="alternate" hreflang="az" href="https://fatihdemirsoy.com/az/">
+<link rel="alternate" hreflang="de" href="https://fatihdemirsoy.com/de/">
+<link rel="alternate" hreflang="fr" href="https://fatihdemirsoy.com/fr/">
+<link rel="alternate" hreflang="sv" href="https://fatihdemirsoy.com/sv/">
+<link rel="alternate" hreflang="ru" href="https://fatihdemirsoy.com/ru/">
+<link rel="alternate" hreflang="x-default" href="https://fatihdemirsoy.com/en/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✉️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EDF1EF; --surface:#F8FAF9; --ink:#1B2A31; --muted:#56666D;
+  --line:#C9D3CF; --ok:#0E7A63; --diff:#A3245A; --accent:#1E4FBF; --on-accent:#FFFFFF;
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#121A1E; --surface:#1A252A; --ink:#E4ECE9; --muted:#9AAAA6;
+    --line:#2E3D43; --ok:#3FC7A4; --diff:#F07AAB; --accent:#7EA2FF; --on-accent:#0D1620;
+    color-scheme:dark;
+  }
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Schibsted Grotesk",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  font-size:1.0625rem;line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:68rem;margin:0 auto;padding:0 1.25rem}
+.measure{max-width:38rem}
+
+/* header */
+.top{display:flex;justify-content:space-between;align-items:center;padding:1.25rem 0}
+.name{font-weight:800;letter-spacing:-.01em;text-decoration:none;color:var(--ink)}
+.top a.small{font-size:.95rem}
+
+/* hero */
+.hero{display:grid;gap:2.5rem;padding:2.5rem 0 4rem;align-items:center}
+@media (min-width:60rem){.hero{grid-template-columns:1fr 1.05fr;gap:3.5rem;padding:4rem 0 5.5rem}}
+h1{
+  font-size:clamp(2.1rem,5.2vw,3.4rem);line-height:1.05;letter-spacing:-.025em;
+  font-weight:800;margin:0 0 1.25rem;
+}
+.lede{font-size:1.2rem;color:var(--muted);margin:0 0 2rem;max-width:32rem}
+.btn{
+  display:inline-block;background:var(--accent);color:var(--on-accent);
+  font-weight:700;text-decoration:none;padding:.9rem 1.4rem;border-radius:999px;
+}
+.btn:hover{filter:brightness(1.08)}
+.under{font-size:.95rem;color:var(--muted);margin-top:1rem}
+
+/* the count report: the memorable element */
+.report{
+  background:var(--surface);border:1px solid var(--line);border-radius:14px;
+  padding:1.25rem 1.25rem .75rem;
+}
+.report h2{font-size:1rem;margin:0 0 .25rem;font-weight:700;letter-spacing:0}
+.report p.cap{font-size:.9rem;color:var(--muted);margin:0 0 1rem}
+.scroll{overflow-x:auto}
+table.count{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:.98rem;min-width:24rem}
+.count th{font-size:.85rem;font-weight:500;color:var(--muted);text-align:right;padding:.4rem .5rem;border-bottom:1px solid var(--line)}
+.count th:first-child,.count td:first-child{text-align:left}
+.count td{padding:.6rem .5rem;text-align:right;border-bottom:1px solid var(--line)}
+.count tr:last-child td{border-bottom:0}
+.count td.who{font-weight:500}
+.st{font-weight:700;white-space:nowrap}
+.st.ok{color:var(--ok)}
+.st.diff{color:var(--diff)}
+.note{font-size:.85rem;color:var(--muted);text-align:left!important;padding-top:0!important;border-bottom:1px solid var(--line)}
+
+/* sections */
+section.block{padding:3.5rem 0;border-top:1px solid var(--line)}
+h2.sec{font-size:clamp(1.6rem,3.2vw,2.2rem);line-height:1.15;letter-spacing:-.02em;margin:0 0 1rem;font-weight:800}
+.block p{margin:0 0 1rem}
+
+ol.steps{list-style:none;padding:0;margin:2rem 0 0;display:grid;gap:1.75rem;counter-reset:s}
+@media (min-width:48rem){ol.steps{grid-template-columns:repeat(4,1fr)}}
+ol.steps li{counter-increment:s;border-top:3px solid var(--ink);padding-top:.9rem}
+ol.steps li::before{content:counter(s);display:block;font-weight:800;font-size:1.6rem;line-height:1;margin-bottom:.6rem}
+ol.steps h3{font-size:1.05rem;margin:0 0 .35rem}
+ol.steps p{font-size:.97rem;color:var(--muted);margin:0}
+
+.prices{display:grid;gap:2.5rem}
+@media (min-width:56rem){.prices{grid-template-columns:1.2fr 1fr;gap:4rem}}
+table.price{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.price td{padding:.85rem 0;border-bottom:1px solid var(--line);vertical-align:top}
+.price td:last-child{text-align:right;font-weight:700;white-space:nowrap;padding-left:1rem}
+.price tr.main td{font-size:1.15rem}
+.price small{display:block;color:var(--muted);font-weight:400;font-size:.9rem}
+.fine{font-size:.92rem;color:var(--muted);margin-top:1rem}
+.example{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1.25rem 1.4rem}
+.example h3{margin:0 0 .75rem;font-size:1.05rem}
+.example p{margin:0 0 .5rem;font-variant-numeric:tabular-nums}
+.example p:last-child{margin:0}
+
+.two{display:grid;gap:2rem}
+@media (min-width:48rem){.two{grid-template-columns:1fr 1fr;gap:3.5rem}}
+.two h3{font-size:1.1rem;margin:0 0 .75rem}
+ul.plain{margin:0;padding-left:1.1rem}
+ul.plain li{margin-bottom:.45rem}
+
+.case{display:grid;gap:2rem}
+@media (min-width:56rem){.case{grid-template-columns:.8fr 1.2fr;gap:4rem}}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:0}
+.facts div{border-left:3px solid var(--ok);padding-left:.75rem}
+.facts dt{font-size:.9rem;color:var(--muted)}
+.facts dd{margin:0;font-size:1.9rem;font-weight:800;line-height:1.1}
+
+details{border-bottom:1px solid var(--line);padding:1rem 0}
+details summary{cursor:pointer;font-weight:700;list-style-position:outside}
+details p{margin:.6rem 0 0;color:var(--muted)}
+
+.contact{padding:4rem 0 5rem;border-top:1px solid var(--line)}
+.contact .row{display:flex;flex-wrap:wrap;gap:1rem 1.5rem;align-items:center;margin-top:1.5rem}
+footer{font-size:.9rem;color:var(--muted);padding:1.5rem 0 2.5rem;border-top:1px solid var(--line)}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* form */
+form.quote{display:grid;gap:1rem;margin-top:1.75rem;max-width:40rem}
+@media (min-width:40rem){form.quote{grid-template-columns:1fr 1fr}.full{grid-column:1/-1}}
+.field label{display:block;font-weight:500;font-size:.95rem;margin-bottom:.35rem}
+.field .opt{color:var(--muted);font-weight:400}
+.field input,.field select,.field textarea{
+  width:100%;font:inherit;color:var(--ink);background:var(--surface);
+  border:1px solid var(--line);border-radius:10px;padding:.7rem .8rem;
+}
+.field textarea{min-height:6.5rem;resize:vertical}
+.field input:focus-visible,.field select:focus-visible,.field textarea:focus-visible{outline:3px solid var(--accent);outline-offset:1px}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.actions{display:flex;flex-wrap:wrap;gap:.75rem 1rem;align-items:center}
+button.btn{border:0;cursor:pointer;font:inherit;font-weight:700}
+button.btn[disabled]{opacity:.6;cursor:wait}
+.btn.ghost{background:transparent;color:var(--accent);border:2px solid var(--accent)}
+.status{min-height:1.5rem;font-weight:500;margin:0}
+.status.ok{color:var(--ok)}.status.err{color:var(--diff)}
+.kvkk{font-size:.88rem;color:var(--muted);margin:0}
+.contact .alt{margin-top:2rem;color:var(--muted)}
+
+/* language switcher */
+.langs{display:flex;flex-wrap:wrap;gap:.15rem .6rem;font-size:.9rem;margin:0;padding:0;list-style:none}
+.langs a{color:var(--muted);text-decoration:none;padding:.15rem 0}
+.langs a:hover{color:var(--ink);text-decoration:underline}
+.langs a[aria-current="true"]{color:var(--ink);font-weight:700}
+.top{flex-wrap:wrap;gap:.75rem 1.5rem}
+.top-right{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1.25rem}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <a class="name" href="/az/">Fatih Demirsoy</a>
+    <div class="top-right">
+      <nav aria-label="Dil"><ul class="langs"><li><a href="/" hreflang="tr" lang="tr">Türkçe</a></li><li><a href="/en/" hreflang="en" lang="en">English</a></li><li><a href="/az/" hreflang="az" lang="az" aria-current="true">Azərbaycanca</a></li><li><a href="/de/" hreflang="de" lang="de">Deutsch</a></li><li><a href="/fr/" hreflang="fr" lang="fr">Français</a></li><li><a href="/sv/" hreflang="sv" lang="sv">Svenska</a></li><li><a href="/ru/" hreflang="ru" lang="ru">Русский</a></li></ul></nav>
+      <a class="small" href="https://wa.me/902622444189?text=Salam%2C%20Google%20Workspace-%C9%99%20ke%C3%A7id%20%C3%BC%C3%A7%C3%BCn%20qiym%C9%99t%20t%C9%99klifi%20almaq%20ist%C9%99yir%C9%99m.">WhatsApp-da yazın</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div>
+        <h1>Şirkət e-poçtunuzu Google Workspace-ə köçürürəm. Hər qutunu sayaraq.</h1>
+        <p class="lede">Yandex, cPanel, Plesk, Microsoft 365 və ya başqa provayderdən keçid: DNS, istifadəçilər, təhlükəsizlik ayarları və köhnə məktublar. Sabit qiymət, poçt axınınız dayanmadan.</p>
+        <a class="btn" href="#iletisim">Təklif istəyin</a>
+        <p class="under">İstifadəçi sayınızı və hazırkı e-poçt provayderinizi yazmağınız kifayətdir.</p>
+      </div>
+
+      <figure class="report" aria-labelledby="rep-title">
+        <h2 id="rep-title">Təhvil zamanı aldığınız say hesabatı</h2>
+        <p class="cap">Nümunə. Hər qutu üçün köhnə sistemdəki və Workspace-dəki məktub sayını müqayisə edirəm.</p>
+        <div class="scroll">
+          <table class="count">
+            <thead><tr><th scope="col">Qutu</th><th scope="col">Köhnə sistem</th><th scope="col">Workspace</th><th scope="col">Vəziyyət</th></tr></thead>
+            <tbody>
+              <tr><td class="who">satis@</td><td data-n="12480">12.480</td><td data-n="12480">12.480</td><td class="st ok">Uyğundur</td></tr>
+              <tr><td class="who">info@</td><td data-n="8915">8.915</td><td data-n="8915">8.915</td><td class="st ok">Uyğundur</td></tr>
+              <tr><td class="who">muhasibat@</td><td data-n="31207">31.207</td><td data-n="31189">31.189</td><td class="st diff">18 fərq</td></tr>
+              <tr><td colspan="4" class="note">Fərq: 18 məktub köhnə sistemdə viruslu kimi işarələnib. Hesabatda tək-tək göstərilib.</td></tr>
+              <tr><td class="who">rehberlik@</td><td data-n="9402">9.402</td><td data-n="9402">9.402</td><td class="st ok">Yenidən köçürüldü</td></tr>
+              <tr><td colspan="4" class="note">Köçürmə aləti “tamamlandı” dedi, amma 4.400 məktub çatışmırdı. Sayda aşkarlandı.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+    </div>
+
+    <section class="block" id="surec">
+      <div class="measure">
+        <h2 class="sec">Keçid necə gedir</h2>
+        <p>İşlərin çoxu 1–3 gün çəkir. Köçürmə yoxlanılana qədər köhnə sisteminiz bağlanmır.</p>
+      </div>
+      <ol class="steps">
+        <li><h3>İlkin baxış</h3><p>Qutuları, alias-ları, məktub həcmini və DNS-in harada idarə olunduğunu müəyyən edirəm.</p></li>
+        <li><h3>Hesab və DNS</h3><p>Domen təsdiqi, istifadəçilər, MX, SPF, DKIM və DMARC. Administrator təhlükəsizlik ayarları.</p></li>
+        <li><h3>Köçürmə</h3><p>Köhnə məktublar qovluqları ilə birlikdə köçürülür. Keçid anında gələnlər üçün ikinci ötürmə edilir.</p></li>
+        <li><h3>Say və təhvil</h3><p>Hər qutu üzrə say hesabatı, istifadəçilər üçün bir səhifəlik Gmail bələdçisi və 7 gün dəstək.</p></li>
+      </ol>
+    </section>
+
+    <section class="block" id="fiyat">
+      <div class="prices">
+        <div>
+          <h2 class="sec">Qiymətlər</h2>
+          <table class="price">
+            <tbody>
+              <tr class="main"><td>Quraşdırma, DNS, təhlükəsizlik və 5 istifadəçinin köçürülməsi</td><td>80 $</td></tr>
+              <tr><td>Hər əlavə istifadəçi<small>Köçürmə və say yoxlaması daxildir</small></td><td>7 $</td></tr>
+              <tr><td>Əlavə domen<small>Eyni Workspace hesabına ikinci domen</small></td><td>20 $</td></tr>
+              <tr><td>Outlook quraşdırılması<small>İstəyən hər istifadəçi üçün</small></td><td>5 $</td></tr>
+              <tr><td>Aylıq idarəetmə və dəstək<small>Yeni istifadəçi, şifrə, təhlükəsizlik, problemlərin həlli</small></td><td>30 $ / ay</td></tr>
+            </tbody>
+          </table>
+          <p class="fine">Qiymətlər ABŞ dolları ilədir. Ödəniş bank köçürməsi və ya Payoneer ilə. Google Workspace lisenziyasını birbaşa Google-a özünüz ödəyirsiniz.</p>
+        </div>
+        <div class="example">
+          <h3>Nümunə hesablamalar</h3>
+          <p>10 istifadəçi: 80 $ + 5 × 7 $ = <strong>115 $</strong></p>
+          <p>20 istifadəçi: 80 $ + 15 × 7 $ = <strong>185 $</strong></p>
+          <p>20 istifadəçi, 2 domen: <strong>205 $</strong></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="kapsam">
+      <div class="two">
+        <div>
+          <h3>Qiymətə daxildir</h3>
+          <ul class="plain"><li>Workspace hesabının açılması və domen təsdiqi</li><li>İstifadəçilərin yaradılması, şifrə siyasəti, administrator üçün iki addımlı təsdiq</li><li>MX, SPF, DKIM və DMARC quraşdırılması və yoxlanması</li><li>Köhnə məktubların köçürülməsi və son ötürmə</li><li>Hər qutu üzrə say hesabatı</li><li>İstifadəçilər üçün Gmail veb və mobil bələdçisi</li><li>Keçiddən sonra 7 gün dəstək</li></ul>
+        </div>
+        <div>
+          <h3>Ayrıca qiymətləndirilir</h3>
+          <ul class="plain"><li>Outlook quraşdırılmaları</li><li>Faylların Drive-a köçürülməsi</li><li>Keçiddən sonra istənilən qrup və alias dəyişiklikləri</li><li>İstifadəçi təlimi və davamlı idarəetmə</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="referans">
+      <div class="case">
+        <div>
+          <h2 class="sec">Son etdiyim keçid</h2>
+          <dl class="facts">
+            <div><dt>Domen</dt><dd>2</dd></div>
+            <div><dt>Qutu</dt><dd>38</dd></div>
+            <div><dt>Mənbə</dt><dd>Yandex</dd></div>
+          </dl>
+        </div>
+        <div class="measure">
+          <p>İki domeni tək Workspace hesabında birləşdirdim. Rol ünvanları (info, satış, dəstək) öz qutuları ilə köçürüldü, istifadəçilər Gmail veb və mobil tətbiqinə keçdi.</p>
+          <p>Köçürmə aləti bir qutunu “tamamlandı” göstərdi, halbuki 4.400 məktub gəlməmişdi. Say yoxlaması buna görə paketə daxildir: çatışmayan varsa, təhvildən əvvəl görünür.</p>
+          <p>Köhnə sistemdə onsuz da açılmayan, məzmunu itmiş məktublar da hesabatda ayrıca göstərildi. Rəhbərlik nəyin köçürüldüyünü və nəyin əvvəldən xarab olduğunu aydın gördü.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="sss">
+      <div class="measure">
+        <h2 class="sec">Tez-tez verilən suallar</h2>
+        <details><summary>Keçid zamanı məktub ala bilməyəcəyik?</summary><p>Alacaqsınız. MX qeydi dəyişənə qədər məktublar köhnə sistemə gəlir, dəyişdikdən sonra Workspace-ə. Arada gələnlər son ötürmə ilə köçürülür.</p></details>
+        <details><summary>Hesabın administratoru kim olacaq?</summary><p>Siz. Əsas administrator hesabı əvvəldən sizdə açılır, mən ikinci administrator oluram. İş bitəndə icazəmi götürə bilərsiniz.</p></details>
+        <details><summary>Ödəniş necədir?</summary><p>Yarısı iş başlayanda, qalanı MX qeydinin dəyişdirildiyi gün. Bank köçürməsi və ya Payoneer ilə, faktura verilir.</p></details>
+        <details><summary>Köhnə sistemdə xarab olan məktublar nə olur?</summary><p>Köhnə provayderdə onsuz da açılmayan və ya məzmunu itmiş məktublar köçürülə bilməz. Onları hesabatda ayrıca göstərirəm ki, nəyin əvvəldən xarab olduğunu biləsiniz.</p></details>
+        <details><summary>Başqa ölkədəyəm. Problem olarmı?</summary><p>Xeyr. İşin hamısı uzaqdan görülür. Sizin işiniz DNS panelinə giriş vermək və istifadəçilərə yeni şifrələrini çatdırmaqdır.</p></details>
+      </div>
+    </section>
+
+    <section class="contact" id="iletisim">
+      <div class="measure">
+        <h2 class="sec">Təklif istəyin</h2>
+        <p>Formu doldurun, eyni gün qiymətlə cavab verirəm. İstəsəniz, eyni məlumatları bir toxunuşla WhatsApp-dan da göndərə bilərsiniz.</p>
+      </div>
+      <form class="quote" id="quote" novalidate>
+        <div class="field"><label for="f-ad">Ad, soyad</label><input id="f-ad" data-k="name" autocomplete="name" required></div>
+        <div class="field"><label for="f-firma">Şirkət <span class="opt">(istəyə bağlı)</span></label><input id="f-firma" data-k="company" autocomplete="organization"></div>
+        <div class="field"><label for="f-tel">Telefon</label><input id="f-tel" data-k="phone" type="tel" autocomplete="tel" inputmode="tel"></div>
+        <div class="field"><label for="f-mail">E-poçt</label><input id="f-mail" data-k="email" type="email" autocomplete="email"></div>
+        <div class="field"><label for="f-kul">İstifadəçi sayı</label><input id="f-kul" data-k="users" type="number" min="1" inputmode="numeric" required></div>
+        <div class="field"><label for="f-dom">Domen sayı</label><input id="f-dom" data-k="domains" type="number" min="1" value="1" inputmode="numeric"></div>
+        <div class="field full"><label for="f-kay">Hazırda hansı e-poçt xidmətindən istifadə edirsiniz?</label>
+          <select id="f-kay" data-k="source"><option>Yandex</option><option>Hostinq poçtu (cPanel, Plesk)</option><option>Microsoft 365 / Outlook</option><option>Başqa Google Workspace hesabı</option><option>Digər / bilmirəm</option></select></div>
+        <div class="field full"><label for="f-not">Əlavə etmək istədikləriniz <span class="opt">(istəyə bağlı)</span></label><textarea id="f-not" data-k="note"></textarea></div>
+        <div class="hp" aria-hidden="true"><label for="f-hp">Bu sahəni boş buraxın</label><input id="f-hp" name="_honey" tabindex="-1" autocomplete="off"></div>
+        <p class="kvkk full">Məlumatlarınız yalnız təklif hazırlamaq üçün istifadə olunur və heç kimlə paylaşılmır.</p>
+        <div class="actions full">
+          <button class="btn" type="submit" id="send-mail">Təklif sorğusunu göndər</button>
+          <button class="btn ghost" type="button" id="send-wa">WhatsApp-dan göndər</button>
+        </div>
+        <p class="status full" id="status" role="status" aria-live="polite"></p>
+      </form>
+      <p class="alt">Birbaşa yazmaq istəsəniz: <a href="mailto:bilgi@fatihdemirsoy.com">bilgi@fatihdemirsoy.com</a></p>
+    </section>
+  </main>
+
+  <footer>Fatih Demirsoy, şəbəkə, sistem və korporativ e-poçt. Digər bağlantılarım: <a href="https://linktr.ee/FatihDemirsoy">linktr.ee/FatihDemirsoy</a></footer>
+</div>
+
+<script>
+(function(){
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var cells = document.querySelectorAll('.count td[data-n]');
+  var fmt = new Intl.NumberFormat('az-AZ');
+  var dur = 1100, t0 = null;
+  function step(t){
+    if (!t0) t0 = t;
+    var p = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+    cells.forEach(function(c){ c.textContent = fmt.format(Math.round(+c.dataset.n * e)); });
+    if (p < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+})();
+</script>
+<script>
+(function(){
+  var T = {"e_name": "Adınızı yazın.", "e_contact": "Cavab verə bilməyim üçün telefon və ya e-poçt yazın.", "e_email": "E-poçt ünvanını yoxlayın.", "e_users": "İstifadəçi sayını yazın, təxmini olması kifayətdir.", "sending": "Göndərilir…", "ok": "Sorğunuz çatdı. Eyni gün cavab verəcəyəm.", "fail": "Göndərilmədi. “WhatsApp-dan göndər” düyməsindən istifadə edin və ya bilgi@fatihdemirsoy.com ünvanına yazın.", "wa_intro": "Salam, Google Workspace-ə keçid üçün qiymət təklifi almaq istəyirəm.", "code": "AZ", "labels": {"name": "Ad, soyad", "company": "Şirkət", "phone": "Telefon", "email": "E-poçt", "users": "İstifadəçi sayı", "domains": "Domen sayı", "source": "Hazırda hansı e-poçt xidmətindən istifadə edirsiniz", "note": "Əlavə etmək istədikləriniz"}};
+  var MAIL = "bilgi@fatihdemirsoy.com", WA = "902622444189";
+  var form = document.getElementById("quote"), st = document.getElementById("status");
+  var btn = document.getElementById("send-mail");
+  function data(){
+    var d = {};
+    form.querySelectorAll("[data-k]").forEach(function(el){ d[el.dataset.k] = el.value.trim(); });
+    return d;
+  }
+  function labeled(d){
+    var o = {};
+    Object.keys(d).forEach(function(k){ if (d[k]) o[T.labels[k]] = d[k]; });
+    return o;
+  }
+  function check(d){
+    if (!d.name) return T.e_name;
+    if (!d.phone && !d.email) return T.e_contact;
+    if (d.email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(d.email)) return T.e_email;
+    if (!d.users) return T.e_users;
+    return "";
+  }
+  function say(msg, cls){ st.textContent = msg; st.className = "status full " + (cls || ""); }
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    if (form.elements["_honey"].value) return;
+    var d = data(), err = check(d);
+    if (err) { say(err, "err"); return; }
+    btn.disabled = true; say(T.sending);
+    var body = Object.assign({ "Dil / Language": T.code }, labeled(d), {
+      _subject: "[" + T.code + "] Workspace teklif: " + (d.company || d.name) + ", " + d.users + " kullanıcı",
+      _template: "table", _captcha: "false"
+    });
+    if (d.email) body._replyto = d.email;
+    fetch("https://formsubmit.co/ajax/" + MAIL, {
+      method: "POST", headers: {"Content-Type":"application/json","Accept":"application/json"}, body: JSON.stringify(body)
+    }).then(function(r){ return r.json(); }).then(function(j){
+      if (j && (j.success === true || j.success === "true")) { form.reset(); say(T.ok, "ok"); }
+      else throw new Error();
+    }).catch(function(){ say(T.fail, "err"); })
+      .finally(function(){ btn.disabled = false; });
+  });
+  document.getElementById("send-wa").addEventListener("click", function(){
+    var d = data(), err = check(d);
+    if (err) { say(err, "err"); return; }
+    var lines = [T.wa_intro, ""], l = labeled(d);
+    Object.keys(l).forEach(function(k){ lines.push(k + ": " + l[k]); });
+    say("");
+    window.open("https://wa.me/" + WA + "?text=" + encodeURIComponent(lines.join("\n")), "_blank", "noopener");
+  });
+})();
+</script>
+</body>
+</html>
